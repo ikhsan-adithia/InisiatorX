@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#ffffff"
     tools:context=".Mutabaah">
 
 
@@ -17,47 +17,63 @@
             android:layout_height="match_parent"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/title"
+            <RelativeLayout
+                android:id="@+id/haha"
+                android:background="@color/colorPrimary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hai Calon Penghuni"
-                android:textSize="21sp"
-                android:fontFamily="@font/sf_pro_display_medium"
-                android:textColor="#ffffff"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"/>
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/subtitle"
-                android:layout_below="@+id/title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Surga!"
-                android:textColor="#ffffff"
-                android:textSize="28sp"
-                android:fontFamily="@font/sf_pro_display_bold"
-                android:layout_marginLeft="20dp"/>
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hai Calon Penghuni"
+                    android:textSize="21sp"
+                    android:fontFamily="@font/sf_pro_display_medium"
+                    android:textColor="#ffffff"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="20dp"/>
 
-            <TextView
-                android:id="@+id/subsub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TODAY TASK TO DO  11-Dec-2020"
-                android:fontFamily="@font/nunito_sans_bold"
-                android:textSize="13sp"
-                android:layout_below="@+id/subtitle"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="30dp"
-                android:textColor="#ffffff"/>
+                <TextView
+                    android:id="@+id/subtitle"
+                    android:layout_below="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Surga!"
+                    android:textColor="#ffffff"
+                    android:textSize="28sp"
+                    android:fontFamily="@font/sf_pro_display_bold"
+                    android:layout_marginLeft="20dp"/>
+
+                <TextView
+                    android:id="@+id/subsub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TODAY TASK TO DO  11-Dec-2020"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:textSize="13sp"
+                    android:layout_below="@+id/subtitle"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:textColor="#ffffff"/>
+
+                <ImageView
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@id/subsub"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:background="@drawable/top_rounded"/>
+
+
+            </RelativeLayout>
 
             <LinearLayout
-                android:layout_below="@+id/subsub"
-                android:layout_marginTop="30dp"
+                android:layout_below="@+id/haha"
+                android:layout_marginTop="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="@drawable/bottom_sheet_background">
+                android:background="#ffffff">
 
                 <LinearLayout
                     android:id="@+id/dhuha"
