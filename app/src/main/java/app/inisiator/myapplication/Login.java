@@ -40,7 +40,6 @@ public class Login extends AppCompatActivity {
     private TextView link_regist, tp;
     RelativeLayout mainn,utama,dua;
     SpinKitView spin_kit;
-    ImageView bg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +56,6 @@ public class Login extends AppCompatActivity {
         link_regist = findViewById(R.id.tvToSignUp);
         utama = findViewById(R.id.utama);
         dua = findViewById(R.id.dua);
-        bg = findViewById(R.id.bg);
 
         password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -78,7 +76,6 @@ public class Login extends AppCompatActivity {
                         utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
                         dua.setVisibility(View.GONE);
                         mainn.setVisibility(View.GONE);
-                        bg.setVisibility(View.GONE);
                         spin_kit.setVisibility(View.VISIBLE);
                         login(mEmail, mPassword);
                     } else {
@@ -134,7 +131,6 @@ public class Login extends AppCompatActivity {
                                         // Do something after 5s = 5000ms
                                         utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                         dua.setVisibility(View.VISIBLE);
-                                        bg.setVisibility(View.VISIBLE);
                                         spin_kit.setVisibility(View.INVISIBLE);
                                         mainn.setVisibility(View.VISIBLE);
                                         tp.setText("Password yang anda masukkan salah");
@@ -147,7 +143,6 @@ public class Login extends AppCompatActivity {
                                     public void run() {
                                         utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                         dua.setVisibility(View.VISIBLE);
-                                        bg.setVisibility(View.VISIBLE);
                                         spin_kit.setVisibility(View.INVISIBLE);
                                         mainn.setVisibility(View.VISIBLE);
                                         tp.setText("Email Yang anda masukkan tidak ditemukan");
@@ -158,7 +153,6 @@ public class Login extends AppCompatActivity {
                             e.printStackTrace();
                             utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                             dua.setVisibility(View.VISIBLE);
-                            bg.setVisibility(View.VISIBLE);
                             spin_kit.setVisibility(View.INVISIBLE);
                             mainn.setVisibility(View.VISIBLE);
                             Intent intent = new Intent(Login.this, Failed.class);
@@ -171,7 +165,6 @@ public class Login extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                         dua.setVisibility(View.VISIBLE);
-                        bg.setVisibility(View.VISIBLE);
                         spin_kit.setVisibility(View.INVISIBLE);
                         mainn.setVisibility(View.VISIBLE);
                         Intent intent = new Intent(Login.this, Failed.class);

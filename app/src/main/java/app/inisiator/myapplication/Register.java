@@ -41,15 +41,12 @@ public class Register extends AppCompatActivity {
     private CheckBox checkbox;
     private RelativeLayout main,utama,dua;
     private SpinKitView spinKitView;
-    ImageView bg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-
-        bg = findViewById(R.id.bg);
         utama = findViewById(R.id.h);
         dua = findViewById(R.id.dua);
         main = findViewById(R.id.main);
@@ -140,7 +137,6 @@ public class Register extends AppCompatActivity {
             utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
             dua.setVisibility(View.GONE);
             main.setVisibility(View.GONE);
-            bg.setVisibility(View.GONE);
             spinKitView.setVisibility(View.VISIBLE);
             Regist();
         } else {
@@ -181,7 +177,6 @@ public class Register extends AppCompatActivity {
                                     public void run() {
                                         utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                         dua.setVisibility(View.VISIBLE);
-                                        bg.setVisibility(View.VISIBLE);
                                         spinKitView.setVisibility(View.INVISIBLE);
                                         main.setVisibility(View.VISIBLE);
                                         Intent intent = new Intent(Register.this, Failed.class);
@@ -195,7 +190,6 @@ public class Register extends AppCompatActivity {
                                     public void run() {
                                         utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                         dua.setVisibility(View.VISIBLE);
-                                        bg.setVisibility(View.VISIBLE);
                                         spinKitView.setVisibility(View.INVISIBLE);
                                         main.setVisibility(View.VISIBLE);
                                         alert.setText("Email Telah Digunakan!");
@@ -208,7 +202,6 @@ public class Register extends AppCompatActivity {
                                     public void run() {
                                         utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                                         dua.setVisibility(View.VISIBLE);
-                                        bg.setVisibility(View.VISIBLE);
                                         spinKitView.setVisibility(View.INVISIBLE);
                                         main.setVisibility(View.VISIBLE);
                                         alert.setText("Nomor Handphone Telah Digunakan!");
