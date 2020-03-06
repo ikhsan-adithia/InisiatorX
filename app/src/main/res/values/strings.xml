@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tab_artikel">Artikel</string>
+    <string name="tab_kegiatan">Kegiatan</string>
+    <string name="tab_kompetensi">Kompetensi</string>
+
+    <string name="tab_notifikasi">Notifikasi</string>
+    <string name="tab_transaksi">Transaksi</string>
+
+    <string-array name="kota">
+        <item>Pilih Kota</item>
+        <item>Kabupaten Asahan</item>
+        <item>Kabupaten Batu Bara</item>
+        <item>Kabupaten Dairi</item>
+        <item>Kabupaten Deli Serdang</item>
+        <item>Kabupaten Humbang Hasundutan</item>
+        <item>Kabupaten Karo</item>
+        <item>Kabupaten Labuhanbatu</item>
+        <item>Kabupaten Labuhanbatu Selatan</item>
+        <item>Kabupaten Labuhanbatu Utara</item>
+        <item>Kabupaten Langkat</item>
+        <item>Kabupaten Mandailing Natal</item>
+        <item>Kabupaten Nias</item>
+        <item>Kabupaten Nias Barat</item>
+        <item>Kabupaten Nias Selatan</item>
+        <item>Kabupaten Nias Utara</item>
+        <item>Kabupaten Padang Lawas</item>
+        <item>Kabupaten Padang Lawas Utara</item>
+        <item>Kabupaten Pakpak Bharat</item>
+        <item>Kabupaten Samosir</item>
+        <item>Kabupaten Serdang Bedagai</item>
+        <item>Kabupaten Simalungun</item>
+        <item>Kabupaten Tapanuli Selatan</item>
+        <item>Kabupaten Tapanuli Tengah</item>
+        <item>Kabupaten Tapanuli Utara</item>
+        <item>Kabupaten Toba Samosir</item>
+        <item>Kota Binjai</item>
+        <item>Kota Gunungsitoli</item>
+        <item>Kota Medan</item>
+        <item>Kota Padangsidempuan</item>
+        <item>Kota Pematangsiantar</item>
+        <item>Kota Sibolga</item>
+        <item>Kota Tanjungbalai</item>
+        <item>Kota Tebing Tinggi</item>
+    </string-array>
+
+    <string-array name="jenis">
+        <item>Pilih Jenis Kelamin</item>
+        <item>Laki-Laki</item>
+        <item>Perempuan</item>
+    </string-array>
+
+    <string-array name="agama">
+        <item>Pilih Agama</item>
+        <item>Islam</item>
+        <item>Katholik</item>
+        <item>Protestan</item>
+        <item>Hindu</item>
+        <item>Buddha</item>
+        <item>Konghucu</item>
+    </string-array>
+
+    <string-array name="status">
+        <item>Pilih Status</item>
+        <item>Siswa/i</item>
+        <item>Mahasiswa/i</item>
+    </string-array>
+</resources>

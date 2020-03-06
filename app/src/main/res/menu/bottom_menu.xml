@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/beranda"
+        android:icon="@drawable/ic_home"
+        android:title="Beranda"/>
+
+    <item android:id="@+id/peluang"
+        android:icon="@drawable/ic_explore"
+        android:title="Peluang"/>
+
+    <item android:id="@+id/kosong"
+        android:title=""
+        android:enabled="false"/>
+
+    <item android:id="@+id/notifikasi"
+        android:icon="@drawable/ic_notification"
+        android:title="Notifikasi"/>
+
+    <item android:id="@+id/akun"
+        android:icon="@drawable/ic_profile"
+        android:title="Akun"/>
+</menu>

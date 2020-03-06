@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Beranda"
+    android:focusableInTouchMode="true"
+    tools:ignore="HardcodedText">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_alignParentTop="true"
+                        android:background="@drawable/background_home"
+                        tools:ignore="ContentDescription" />
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="40dp">
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmer1"
+                            android:visibility="visible"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                app:cardCornerRadius="50dp"
+                                app:cardBackgroundColor="#979696"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="130dp"
+                                android:layout_height="15dp"
+                                android:layout_marginStart="60dp"
+                                android:layout_marginTop="11dp"
+                                app:cardBackgroundColor="#979696"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="80dp"
+                                android:layout_height="10dp"
+                                android:layout_marginStart="60dp"
+                                android:layout_marginTop="30dp"
+                                app:cardBackgroundColor="#979696"
+                                tools:ignore="SmallSp"/>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:visibility="invisible"
+                        android:id="@+id/userDetailsHome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="40dp">
+
+                        <RelativeLayout
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/ic_circle_profile_home">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/profilePicture_Home"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/profile_inisiator"/>
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/userName_HomeContent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/nunito_sans_bold"
+                            android:text="@string/app_name"
+                            android:textColor="#FFF"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/userEmail_HomeContent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="25dp"
+                            android:fontFamily="@font/nunito_sans_regular"
+                            android:text="@string/app_name"
+                            android:textColor="#FFF"
+                            android:textSize="10sp"
+                            tools:ignore="SmallSp" />
+
+                    </RelativeLayout>
+
+                    <FrameLayout
+                        android:id="@+id/statusDetailsHome"
+                        android:layout_width="match_parent"
+                        android:layout_height="150dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="115dp"
+                        android:layout_marginEnd="15dp"
+                        app:elevation="5dp">
+
+                        <com.dd.ShadowLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#FFFFFF"
+                            app:sl_cornerRadius="15dp"
+                            app:sl_dx="2dp"
+                            app:sl_dy="2dp"
+                            app:sl_shadowColor="#11e1e2e4">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/rounded_corner_5dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentStart="true"
+                                    android:layout_marginStart="11dp"
+                                    android:layout_marginTop="11dp"
+                                    android:fontFamily="@font/nunito_sans_bold"
+                                    android:text="Saldo Saya"
+                                    android:textColor="#4f4f4f"
+                                    android:textSize="14sp" />
+
+                                <TextView
+                                    android:id="@+id/myBalance"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginTop="11dp"
+                                    android:layout_marginEnd="11dp"
+                                    android:fontFamily="@font/nunito_sans_bold"
+                                    android:text="Rp. 0,-"
+                                    android:textColor="#4f4f4f"
+                                    android:textSize="14sp" />
+
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginBottom="10dp"
+                                android:baselineAligned="false"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <Button
+                                        android:id="@+id/btnPay"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:background="@drawable/ic_btn_pay" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:gravity="center"
+                                        android:text="Pay"
+                                        android:textColor="#8d8d8d"
+                                        android:textSize="12.7sp"
+                                        tools:ignore="HardcodedText" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <Button
+                                        android:id="@+id/btnTopUp"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:background="@drawable/ic_btn_top_up" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:gravity="center"
+                                        android:text="Top Up"
+                                        android:textColor="#8d8d8d"
+                                        android:textSize="12.7sp"
+                                        tools:ignore="HardcodedText" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <Button
+                                        android:id="@+id/btnRequest"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:background="@drawable/ic_btn_request" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:gravity="center"
+                                        android:text="Request"
+                                        android:textColor="#8d8d8d"
+                                        android:textSize="12.7sp"
+                                        tools:ignore="HardcodedText" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:orientation="vertical">
+
+                                    <Button
+                                        android:id="@+id/btnLainnya"
+                                        android:layout_width="50dp"
+                                        android:layout_height="50dp"
+                                        android:background="@drawable/ic_btn_send" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:fontFamily="@font/nunito_sans_regular"
+                                        android:gravity="center"
+                                        android:text="Lainnya"
+                                        android:textColor="#8d8d8d"
+                                        android:textSize="12.7sp"
+                                        tools:ignore="HardcodedText" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </com.dd.ShadowLayout>
+
+                    </FrameLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiga Top Teratas"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/sf_pro_display_bold"
+                    android:textSize="15dp"
+                    />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:visibility="visible"
+                    android:id="@+id/spin_kit"
+                    android:layout_marginTop="40dp"
+                    style="@style/SpinKitView.FadingCircle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="#979696" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="invisible"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/berandaTopThree_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginStart="15dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="horizontal"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

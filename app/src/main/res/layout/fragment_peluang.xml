@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Peluang"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/logo_inisiator_white_png" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs_peluang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@drawable/tab_color_selector"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabSelectedTextColor="@color/colorPrimary"
+            app:tabTextColor="@color/colorPrimarySoft" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager_peluang"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:saveEnabled="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tabs_peluang"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="46dp"-->
+<!--        android:layout_gravity="top"-->
+<!--        app:tabSelectedTextColor="@color/selectedTab"-->
+<!--        app:tabTextColor="#363636"-->
+<!--        android:background="#C7C7C7"-->
+<!--        app:tabIndicatorHeight="3dp"-->
+<!--        app:tabIndicatorColor="@color/colorAccent"-->
+<!--        app:tabTextAppearance="@style/CustomTextAppearanceSub" />-->
+
+</LinearLayout>

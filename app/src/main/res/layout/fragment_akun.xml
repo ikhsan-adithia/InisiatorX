@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/AppTheme.ColorAccent"
+    tools:ignore="HardcodedText">
+
+    <ScrollView
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_marginBottom="60dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePicture_Profile"
+                android:layout_width="85dp"
+                android:layout_height="95.7dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/profile_inisiator"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/userName_HomeContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/userEmail_HomeContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:text="Email"
+                android:textColor="#a9a9b0"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="#33979797" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:elevation="5dp"
+                android:orientation="horizontal"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
+
+                <LinearLayout
+                    android:id="@+id/leaderboard_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtMyRank"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="1k+"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Peringkat Saya"
+                        android:textColor="#a9a9b0"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/dailyScore"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Rp. 0,-"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Saldo Saya"
+                        android:textColor="#a9a9b0"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="45dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtMyEnergyLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="20"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Point Saya"
+                        android:textColor="#a9a9b0"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/nameLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <ImageView
+                    android:id="@+id/icname"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_name" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp">
+
+                    <TextView
+                        android:id="@+id/txtName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:text="Nama"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtMyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="Hi my name is..."
+                        android:textColor="#a9a9b0"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/levelLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <ImageView
+                    android:id="@+id/icLevel"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_level" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp">
+
+                    <TextView
+                        android:id="@+id/txtLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:text="Email"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtMyLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="Email"
+                        android:textColor="#a9a9b0"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phoneNumberLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <ImageView
+                    android:id="@+id/icPhone"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_inbox" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp">
+
+                    <TextView
+                        android:id="@+id/txtPhoneNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:text="Nomor Handphone"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtMyPhoneNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="My number..."
+                        android:textColor="#a9a9b0"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ReferralLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <ImageView
+                    android:id="@+id/icReferral"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_profile" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp">
+
+                    <TextView
+                        android:id="@+id/txtReferral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:text="Kode Referral"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtMyReferralCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="My user ID"
+                        android:textColor="#a9a9b0"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/locationLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <ImageView
+                    android:id="@+id/icLocation"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_location" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp">
+
+                    <TextView
+                        android:id="@+id/txtLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:text="Lokasi"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/txtMyLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="My region"
+                        android:textColor="#a9a9b0"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/passwordLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <ImageView
+                    android:id="@+id/icPassword"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_password" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp">
+
+                    <TextView
+                        android:id="@+id/txtPassword"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:text="Password"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/changePassword"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="-14dp"
+                        android:layout_marginBottom="-3dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#a9a0b0" />
+
+                    <TextView
+                        android:id="@+id/txtPasswordSubtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="Change your password"
+                        android:textColor="#a9a9b0"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/logoutLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="horizontal"
+                android:padding="13dp">
+
+                <ImageView
+                    android:id="@+id/icLogout"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:src="@drawable/ic_logout" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="vertical"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp">
+
+                    <TextView
+                        android:id="@+id/txtLogout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:text="Keluar"
+                        android:textColor="#3b3b3b"
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/logoutUser"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="right"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="-14dp"
+                        android:layout_marginBottom="-3dp"
+                        android:src="@drawable/ic_chevron_right"
+                        android:tint="#a9a0b0" />
+
+                    <TextView
+                        android:id="@+id/txtMyLogout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="Logout from this account"
+                        android:textColor="#a9a9b0"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

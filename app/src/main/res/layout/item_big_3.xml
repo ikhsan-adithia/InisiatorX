@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_stars"/>
+
+        <LinearLayout
+            android:id="@+id/showLeaderboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_group_1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_marginTop="25.5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <RelativeLayout
+                    android:layout_width="91dp"
+                    android:layout_height="91dp"
+                    android:background="@drawable/ic_circle_profile_home">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profilePicture_lb"
+                        android:layout_width="87dp"
+                        android:layout_height="87dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/profile_inisiator"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:text="Jabbar Ali Panggabean"/>
+
+            <TextView
+                android:id="@+id/peringkat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:text="Peringkat 1"
+                android:textSize="18dp"/>
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:fontFamily="@font/nunito_sans_bold"-->
+<!--                android:textColor="#ffffff"-->
+<!--                android:gravity="center"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:textSize="10sp"-->
+<!--                android:text="Tidak Melihat Peringkatmu Disini ?\n Tap Disini Untuk Melihat Peringkatmu"/>-->
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:id="@+id/item_big_point"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:textColor="#E62B38"
+                    android:text="1,785 Points"
+                    android:textSize="15dp"/>
+
+
+                    <TextView
+                        android:id="@+id/menu_label"
+                        android:textColor="#ffffff"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="right"
+                        android:text="1"
+                        android:textSize="26dp"
+                        android:gravity="center"
+                        android:layout_marginRight="20dp"
+                        android:lines="1"
+                        android:background="@drawable/ic_coronas_totales"/>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+
+</RelativeLayout>

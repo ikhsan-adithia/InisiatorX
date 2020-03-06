@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/h"
+    android:layout_width="match_parent"
+    android:layout_height="1000dp"
+    tools:context=".Register"
+    android:background="@color/colorPrimary">
+
+
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        android:visibility="invisible"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        app:SpinKit_Color="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_logo_straight" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_red_planet"/>
+
+        <TextView
+            android:id="@+id/tvTitleApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView3"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="70dp"
+            android:fontFamily="@font/canaro_light"
+            android:text="Join, Inisiator!"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSubtitleSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tvTitleApp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/canaro_light"
+            android:text="Daftar yuk untuk mulai perjalananmu."
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/bg"
+        android:layout_marginTop="-30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/ic_bottom_layer" />
+
+    <RelativeLayout
+        android:id="@+id/dua"
+        android:layout_below="@+id/main"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:text=""
+            android:textColor="#F95B48"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilName"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            app:boxStrokeColor="#D23E3F"
+            android:layout_alignTop="@+id/textView24"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="30dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#CDD2D6"
+                android:hint="Nama pengguna"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHint="#CDD2D6"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_alignTop="@+id/tilName"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#CDD2D6"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:textColor="#000000"
+                android:textColorHint="#CDD2D6"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPhone"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_alignTop="@+id/tilEmail"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#CDD2D6"
+                android:hint="Nomor handphone"
+                android:inputType="number"
+                android:textColor="#000000"
+                android:textColorHint="#CDD2D6"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_alignTop="@+id/tilPhone"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginRight="30dp"
+            app:passwordToggleEnabled="true"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/titPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#CDD2D6"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="#000000"
+                android:textColorHint="#CDD2D6"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/cbPrivacyPolicy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/tilPassword"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:text="Dengan mendaftar, Saya menyetujui syarat dan kebijakan
+privasi yang telah ditentukan oleh InisiatorX"
+            android:textColor="#CECECE"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/btnSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/cbPrivacyPolicy"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rounded"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:text="Daftar"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            tools:ignore="UnusedAttribute" />
+
+        <TextView
+            android:id="@+id/tvToSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/btnSignUp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="30dp"
+            android:fontFamily="@font/canaro_light"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:text="Sudah punya akun? Masuk disini"
+            android:textColor="#212121"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

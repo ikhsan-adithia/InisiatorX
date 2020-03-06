@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".Mutabaah">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hai Calon Penghuni"
+                android:textSize="21sp"
+                android:fontFamily="@font/sf_pro_display_medium"
+                android:textColor="#ffffff"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_below="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Surga!"
+                android:textColor="#ffffff"
+                android:textSize="28sp"
+                android:fontFamily="@font/sf_pro_display_bold"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/subsub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TODAY TASK TO DO  11-Dec-2020"
+                android:fontFamily="@font/nunito_sans_bold"
+                android:textSize="13sp"
+                android:layout_below="@+id/subtitle"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:textColor="#ffffff"/>
+
+            <LinearLayout
+                android:layout_below="@+id/subsub"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/bottom_sheet_background">
+
+                <LinearLayout
+                    android:id="@+id/dhuha"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="4"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:layout_height="55dp"
+                        android:src="@drawable/ic_dhuha"/>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.8"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sholat Dhuha"
+                            android:textSize="15sp"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Melaksanakan Sholat Dhuha"
+                            android:textSize="13sp"
+                            android:textColor="#000000"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/checkdhuha"
+                        android:layout_gravity="center"
+                        android:layout_width="20dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_ellipse_1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tahajud"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="4"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:layout_height="55dp"
+                        android:src="@drawable/ic_tahajud"/>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.8"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Sholat Tahajud"
+                            android:textSize="15sp"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Melaksanakan Sholat Tahajud"
+                            android:textSize="13sp"
+                            android:textColor="#000000"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/checktahajud"
+                        android:layout_gravity="center"
+                        android:layout_width="20dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_ellipse_1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/puasa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="4"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:layout_height="55dp"
+                        android:src="@drawable/ic_puasa"/>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.8"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Puasa Sunnah"
+                            android:textSize="15sp"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Melaksanakan Puasa Sunnah"
+                            android:textSize="13sp"
+                            android:textColor="#000000"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/checkpuasa"
+                        android:layout_gravity="center"
+                        android:layout_width="20dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_ellipse_1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/infaq"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="4"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:layout_height="55dp"
+                        android:src="@drawable/ic_infaq"/>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.8"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Ikhlas Berinfaq"
+                            android:textSize="15sp"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Berinfaq Dengan Ikhlas"
+                            android:textSize="13sp"
+                            android:textColor="#000000"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/checkinfaq"
+                        android:layout_gravity="center"
+                        android:layout_width="20dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_ellipse_1"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tilawah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="4"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:layout_height="55dp"
+                        android:src="@drawable/ic_tilawah"/>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_width="0dp"
+                        android:layout_weight="2.8"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Tilawah"
+                            android:textSize="15sp"
+                            android:textColor="#000000"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Membaca Alquran Dengan Serius"
+                            android:textSize="13sp"
+                            android:textColor="#000000"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/checktilawah"
+                        android:layout_gravity="center"
+                        android:layout_width="20dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_ellipse_1"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--    <ImageView-->
+            <!--        android:layout_width="match_parent"-->
+            <!--        android:layout_height="match_parent"-->
+            <!--        android:src="@drawable/bottom_sheet_background"/>-->
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
