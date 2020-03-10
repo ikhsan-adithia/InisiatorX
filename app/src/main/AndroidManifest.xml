@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.inisiator.myapplication">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -12,24 +17,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".ReadActivity"
+        <activity android:name=".Ganci"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".CompleteBioActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".EventDetailActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".QrTicketPreviewActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".TicketPaymentActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
-        <activity android:name=".Mutabaah"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Pin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Eshopping"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Print"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReadActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CompleteBioActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EventDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".QrTicketPreviewActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TicketPaymentActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Mutabaah"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Printmenu"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -96,10 +96,14 @@ class Beranda : Fragment() {
             bottomSheetView.findViewById<View>(R.id.close).setOnClickListener { bottomSheetDialog.cancel() }
             bottomSheetDialog.setContentView(bottomSheetView)
             val btnprint = bottomSheetView.findViewById<LinearLayout>(R.id.print)
-//            btnprint.setOnClickListener { startActivity(Intent(activity, Printmenu::class.java)) }
+            btnprint.setOnClickListener { startActivity(Intent(activity, Printmenu::class.java)) }
             val btnmutabaah = bottomSheetView.findViewById<LinearLayout>(R.id.mutabaah)
             btnmutabaah.setOnClickListener {
                 type(no!!)
+            }
+            val eshopping = bottomSheetView.findViewById<LinearLayout>(R.id.eshopping)
+            eshopping.setOnClickListener {
+                startActivity(Intent(activity, Eshopping::class.java))
             }
             bottomSheetDialog.show()
         }

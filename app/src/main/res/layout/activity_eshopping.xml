@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Eshopping">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:text="   Eshopping InisiatorX"
+        android:fontFamily="@font/sf_pro_display_bold"
+        android:textColor="#ffffff"
+        android:gravity="center|left"
+        android:textSize="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/title"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_corner_5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/sf_pro_display_medium"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:text="Perhatian!"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/sf_pro_display_regular"
+            android:textSize="13dp"
+            android:padding="10dp"
+            android:text="Ini merupakan fitur untuk seluruh user InisiatorX melakukan pembelanjaan online, dengan cara menukarkan coinX dengan merchandise yang menarik di bawah ini."/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/subtitle"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp">
+
+        <Button
+            android:id="@+id/btntopin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@+id/title"
+            android:background="@drawable/rounded_corner_5dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Belanja Pin Online"
+            android:textSize="15dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/btntoganci"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:layout_below="@+id/title"
+            android:background="@drawable/rounded_corner_5dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Belanja Ganci Online"
+            android:textSize="15dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

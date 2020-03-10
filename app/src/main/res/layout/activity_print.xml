@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bottom_sheet_background"
+    tools:context=".Print">
+
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        android:visibility="visible"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:SpinKit_Color="@color/colorPrimary" />
+
+    <ScrollView
+        android:id="@+id/main"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/colorPrimary">
+
+                <ImageView
+                    android:id="@+id/close"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_close_white"
+                    android:layout_marginTop="20dp"
+                    />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_below="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:padding="15dp"
+                android:src="@drawable/ic_group_6"/>
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_display_bold"
+                android:text="Detail print anda"
+                android:layout_marginLeft="20dp"
+                android:textSize="17dp"
+                android:layout_below="@+id/image"
+                android:layout_marginTop="15dp" />
+
+            <LinearLayout
+                android:id="@+id/promo"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subtitle"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_promo"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPromo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="20dp"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/titPromo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#CDD2D6"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:hint="Kode Promo"
+                        android:inputType="text"
+                        android:textColor="#000000"
+                        android:textColorHint="#CDD2D6"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/tujuan"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/promo"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_promotion"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/rounded_corner_5dp"
+                    android:backgroundTint="#DCDCDC">
+
+                    <Spinner
+                        android:id="@+id/merchant"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/jumlah"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tujuan"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_count"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilJumlah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="20dp"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/titJumlah"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#CDD2D6"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:hint="Jumlah / Rangkap Print"
+                        android:inputType="number"
+                        android:textColor="#000000"
+                        android:textColorHint="#CDD2D6"
+                        android:textSize="12sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/file"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/jumlah"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:src="@drawable/ic_folder"/>
+
+                <Button
+                    android:id="@+id/btnfile"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/rounded_corner_5dp"
+                    android:layout_height="30dp"
+                    android:backgroundTint="#DCDCDC"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Pilih File Kamu Disini"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btncheck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_below="@+id/file"
+                android:background="@drawable/rounded_corner_5dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:text="Cek Harga"
+                android:textSize="15dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"/>
+
+            <LinearLayout
+                android:id="@+id/linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btncheck"
+                android:layout_marginTop="21dp"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/sf_pro_display_bold"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:text="Harga Awal"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/sf_pro_display_bold"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:text="Rp. 0000"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear2"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/sf_pro_display_bold"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:text="Potongan Kode Promo"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/sf_pro_display_bold"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:text="Rp. 0000"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear3"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/sf_pro_display_bold"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:text="Total Bayar"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/sf_pro_display_bold"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:text="Rp. 0000"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_below="@+id/linear4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnedit"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_below="@+id/linear4"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/rounded_corner_5dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:text="Edit Pesanan"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/btnsubmit"
+                    android:layout_width="0dp"
+                    android:layout_height="31dp"
+                    android:layout_below="@+id/linear4"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/rounded_corner_5dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:text="Pesan Sekarang"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp"
+                    android:visibility="invisible" />
+
+                <com.github.barteksc.pdfviewer.PDFView
+                    android:id="@+id/pdfView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

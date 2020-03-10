@@ -47,6 +47,8 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'net.gotev:uploadservice:2.1'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }
 repositories {
     mavenCentral()
