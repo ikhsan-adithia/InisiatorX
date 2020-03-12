@@ -43,7 +43,7 @@ class KegiatanFragment : Fragment() {
         swipeContainer = root.findViewById(R.id.swipe_kegiatan_tab)
 
         swipeContainer.setOnRefreshListener {
-            fetchdata()
+//            fetchdata()
             loadWeb()
             Handler().postDelayed({
                 if (swipeContainer.isRefreshing) {
@@ -57,7 +57,7 @@ class KegiatanFragment : Fragment() {
         webView!!.webViewClient = AppWebViewClients()
         loadWeb()
 
-        fetchdata()
+//        fetchdata()
 
         return root
     }
@@ -79,55 +79,55 @@ class KegiatanFragment : Fragment() {
         })
     }
 
-    private fun fetchdata() {
-        val url = "https://awalspace.com/app/imbalopunyajangandiganggu/eventTicket.php"
-        val strReq = object : StringRequest(Method.POST, url,
-                Response.Listener { response ->
-                    val adapter = GroupAdapter<ViewHolder>()
-
-                    try {
-                        val array = JSONArray(response)
-
-                        for (i in 0 until array.length()) {
-                            val jsonObject = array.getJSONObject(i)
-
-                            val getTitle = jsonObject.getString("title")
-                            val getLokasi = jsonObject.getString("lokasi")
-                            val getTanggal = jsonObject.getString("tanggal")
-                            val getWaktu = jsonObject.getString("waktu")
-                            val getHarga = jsonObject.getInt("harga")
-
-                            // Convert Y-m-d to Month, day Year / F, d Y
-
-                            adapter.add(TicketItem(
-                                    AvailableTicket(
-                                            getTitle,
-                                            getLokasi,
-                                            getTanggal,
-                                            getWaktu,
-                                            getHarga
-                                    ),
-                                    context!!
-                            ))
-                        }
-
-                        recyclerview_event_tiket.adapter = adapter
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                        Log.e("Event", e.toString())
-                    }
-
-                }, Response.ErrorListener {  }) {
-
-            @Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                return HashMap()
-            }
-        }
-
-        val requestQueue = Volley.newRequestQueue(activity)
-        requestQueue.add(strReq)
-    }
+//    private fun fetchdata() {
+//        val url = "https://awalspace.com/app/imbalopunyajangandiganggu/eventTicket.php"
+//        val strReq = object : StringRequest(Method.POST, url,
+//                Response.Listener { response ->
+//                    val adapter = GroupAdapter<ViewHolder>()
+//
+//                    try {
+//                        val array = JSONArray(response)
+//
+//                        for (i in 0 until array.length()) {
+//                            val jsonObject = array.getJSONObject(i)
+//
+//                            val getTitle = jsonObject.getString("title")
+//                            val getLokasi = jsonObject.getString("lokasi")
+//                            val getTanggal = jsonObject.getString("tanggal")
+//                            val getWaktu = jsonObject.getString("waktu")
+//                            val getHarga = jsonObject.getInt("harga")
+//
+//                            // Convert Y-m-d to Month, day Year / F, d Y
+//
+//                            adapter.add(TicketItem(
+//                                    AvailableTicket(
+//                                            getTitle,
+//                                            getLokasi,
+//                                            getTanggal,
+//                                            getWaktu,
+//                                            getHarga
+//                                    ),
+//                                    context!!
+//                            ))
+//                        }
+//
+//                        recyclerview_event_tiket.adapter = adapter
+//                    } catch (e: JSONException) {
+//                        e.printStackTrace()
+//                        Log.e("Event", e.toString())
+//                    }
+//
+//                }, Response.ErrorListener {  }) {
+//
+//            @Throws(AuthFailureError::class)
+//            override fun getParams(): Map<String, String> {
+//                return HashMap()
+//            }
+//        }
+//
+//        val requestQueue = Volley.newRequestQueue(activity)
+//        requestQueue.add(strReq)
+//    }
 
     inner class AppWebViewClients : WebViewClient() {
 

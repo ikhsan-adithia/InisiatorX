@@ -9,10 +9,6 @@
         android:icon="@drawable/ic_explore"
         android:title="Peluang"/>
 
-    <item android:id="@+id/kosong"
-        android:title=""
-        android:enabled="false"/>
-
     <item android:id="@+id/notifikasi"
         android:icon="@drawable/ic_notification"
         android:title="Notifikasi"/>

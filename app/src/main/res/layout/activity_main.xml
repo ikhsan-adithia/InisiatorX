@@ -23,16 +23,16 @@
         app:menu="@menu/bottom_menu"
         android:layout_gravity="bottom"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        app:fabSize="normal"
-        app:elevation="8dp"
-        android:scaleType="center"
-        android:layout_marginBottom="20dp"
-        android:src="@drawable/ic_logo_straight"
-        android:backgroundTint="@color/colorPrimary" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="bottom|center"-->
+<!--        app:fabSize="normal"-->
+<!--        app:elevation="8dp"-->
+<!--        android:scaleType="center"-->
+<!--        android:layout_marginBottom="20dp"-->
+<!--        android:src="@drawable/ic_logo_straight"-->
+<!--        android:backgroundTint="@color/colorPrimary" />-->
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

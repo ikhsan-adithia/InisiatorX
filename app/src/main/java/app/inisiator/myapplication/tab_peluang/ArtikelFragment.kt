@@ -11,10 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import app.inisiator.myapplication.R
-import app.inisiator.myapplication.ReadActivity
+import app.inisiator.myapplication.*
+import app.inisiator.myapplication.UserItem
 import app.inisiator.myapplication.models.AvailArticle
+import app.inisiator.myapplication.models.TopThree
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -38,10 +40,12 @@ class ArtikelFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root =  inflater.inflate(R.layout.fragment_artikel, container, false)
-
+        var artikelSession: ArtikelSession? = null
+        artikelSession = ArtikelSession(activity)
         swipeContainer = root.findViewById(R.id.swipe_artikel_tab)
 
         swipeContainer.setOnRefreshListener {
+            artikelSession.logout()
             fetchArtikel()
             Handler().postDelayed({
                 if (swipeContainer.isRefreshing) {
@@ -50,8 +54,41 @@ class ArtikelFragment : Fragment() {
             }, 1000)
         }
 
-        fetchArtikel()
-
+        val user1: java.util.HashMap<String, String> = artikelSession!!.artikelSession
+        val TITLE1 = user1.get("TITLE1")
+        val TITLE2 = user1.get("TITLE2")
+        val TITLE3 = user1.get("TITLE3")
+        val TITLE4 = user1.get("TITLE4")
+        val TITLE5 = user1.get("TITLE5")
+        val PREVIEW1 = user1.get("PREVIEW1")
+        val PREVIEW2 = user1.get("PREVIEW2")
+        val PREVIEW3 = user1.get("PREVIEW3")
+        val PREVIEW4 = user1.get("PREVIEW4")
+        val PREVIEW5 = user1.get("PREVIEW5")
+        val TIME1 = user1.get("TIME1")
+        val TIME2 = user1.get("TIME2")
+        val TIME3 = user1.get("TIME3")
+        val TIME4 = user1.get("TIME4")
+        val TIME5 = user1.get("TIME5")
+        val URL1 = user1.get("URL1")
+        val URL2 = user1.get("URL2")
+        val URL3 = user1.get("URL3")
+        val URL4 = user1.get("URL4")
+        val URL5 = user1.get("URL5")
+        if (URL1 == null)
+        {
+            fetchArtikel()
+        }
+        else{
+            val adapter: GroupAdapter<*> = GroupAdapter<ViewHolder>()
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE1, "", PREVIEW1, TIME1, URL1)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE2, "", PREVIEW2, TIME2, URL2)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE3, "", PREVIEW3, TIME3, URL3)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE4, "", PREVIEW4, TIME4, URL4)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE5, "", PREVIEW5, TIME5, URL5)))
+            val recyler = root.findViewById<RecyclerView>(R.id.recyclerview_artikel_fragment)
+            recyler.adapter = adapter
+        }
         return root
     }
 
@@ -73,6 +110,48 @@ class ArtikelFragment : Fragment() {
                         val preview = objects.getString("preview")
                         val time = objects.getString("time")
                         val url = objects.getString("url")
+
+                        val arrayIndex1 = array.getJSONObject(0)
+                        val arrayIndex2 = array.getJSONObject(1)
+                        val arrayIndex3 = array.getJSONObject(2)
+                        val arrayIndex4 = array.getJSONObject(3)
+                        val arrayIndex5 = array.getJSONObject(4)
+
+                        var titleArray = arrayOf(
+                                arrayIndex1.getString("title"),
+                                arrayIndex2.getString("title"),
+                                arrayIndex3.getString("title"),
+                                arrayIndex4.getString("title"),
+                                arrayIndex5.getString("title")
+                        )
+
+                        var previewArray = arrayOf(
+                                arrayIndex1.getString("preview"),
+                                arrayIndex2.getString("preview"),
+                                arrayIndex3.getString("preview"),
+                                arrayIndex4.getString("preview"),
+                                arrayIndex5.getString("preview")
+                        )
+
+                        var timeArray = arrayOf(
+                                arrayIndex1.getString("time"),
+                                arrayIndex2.getString("time"),
+                                arrayIndex3.getString("time"),
+                                arrayIndex4.getString("time"),
+                                arrayIndex5.getString("time")
+                        )
+
+                        var urlArray = arrayOf(
+                                arrayIndex1.getString("url"),
+                                arrayIndex2.getString("url"),
+                                arrayIndex3.getString("url"),
+                                arrayIndex4.getString("url"),
+                                arrayIndex5.getString("url")
+                        )
+
+                        var artikelSession: ArtikelSession? = null
+                        artikelSession = ArtikelSession(context!!)
+                        artikelSession.createSession(titleArray[0], titleArray[1], titleArray[2], titleArray[3], titleArray[4], previewArray[0], previewArray[1], previewArray[2], previewArray[3], previewArray[4], timeArray[0], timeArray[1], timeArray[2], timeArray[3], timeArray[4], urlArray[0], urlArray[1], urlArray[2], urlArray[3], urlArray[4])
 
                         adapter.add(ArticleItem(
                             context!!,

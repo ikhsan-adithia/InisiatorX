@@ -58,9 +58,6 @@ public class MainActivity extends AppCompatActivity {
                         else{ fragment = new Peluang(); tampilan = 1; }
                         break;
 
-                    case R.id.kosong:
-                        break;
-
                     case R.id.notifikasi:
                         if(tampilan == 2){}
                         else{ fragment = new Notifikasi(); tampilan = 2;}
@@ -110,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         final TemporarySession temporarySession = new TemporarySession(this);
         temporarySession.logout();
+        final ArtikelSession artikelSession = new ArtikelSession(this);
+        artikelSession.logout();
         new Thread(new Runnable() {
             @Override
             public void run() {
