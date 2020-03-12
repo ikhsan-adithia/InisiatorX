@@ -17,8 +17,6 @@ class ReadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_read)
 
-        supportActionBar?.hide()
-
         val intent = intent
         val url = intent.getStringExtra("url")
         val time = intent.getStringExtra("time")?.toInt()
@@ -52,7 +50,7 @@ class ReadActivity : AppCompatActivity() {
     var calledOnce: Boolean = true
 
     private fun startCountDown(urlTimer: Long) {
-        fab_read.visibility - View.VISIBLE
+        fab_read.visibility = View.VISIBLE
         val timer = MyCounter(urlTimer, 1000)
         timer.start()
         calledOnce = false

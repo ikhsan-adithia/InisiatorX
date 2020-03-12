@@ -9,6 +9,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +27,7 @@ import com.bumptech.glide.Glide
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.activity_read.*
 import kotlinx.android.synthetic.main.avail_article_row.view.*
 import kotlinx.android.synthetic.main.fragment_artikel.*
 import kotlinx.android.synthetic.main.fragment_notifikasi_tab.*
@@ -34,7 +37,7 @@ import org.json.JSONException
 class ArtikelFragment : Fragment() {
 
     private lateinit var swipeContainer: SwipeRefreshLayout
-
+    private var view: WebView? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,17 +78,22 @@ class ArtikelFragment : Fragment() {
         val URL3 = user1.get("URL3")
         val URL4 = user1.get("URL4")
         val URL5 = user1.get("URL5")
+        val THUMBNAIL1 = user1.get("THUMBNAIL1")
+        val THUMBNAIL2 = user1.get("THUMBNAIL2")
+        val THUMBNAIL3 = user1.get("THUMBNAIL3")
+        val THUMBNAIL4 = user1.get("THUMBNAIL4")
+        val THUMBNAIL5 = user1.get("THUMBNAIL5")
         if (URL1 == null)
         {
             fetchArtikel()
         }
         else{
             val adapter: GroupAdapter<*> = GroupAdapter<ViewHolder>()
-            adapter.add(ArticleItem(context!!, AvailArticle(TITLE1, "", PREVIEW1, TIME1, URL1)))
-            adapter.add(ArticleItem(context!!, AvailArticle(TITLE2, "", PREVIEW2, TIME2, URL2)))
-            adapter.add(ArticleItem(context!!, AvailArticle(TITLE3, "", PREVIEW3, TIME3, URL3)))
-            adapter.add(ArticleItem(context!!, AvailArticle(TITLE4, "", PREVIEW4, TIME4, URL4)))
-            adapter.add(ArticleItem(context!!, AvailArticle(TITLE5, "", PREVIEW5, TIME5, URL5)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE1, THUMBNAIL1, PREVIEW1, TIME1, URL1)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE2, THUMBNAIL2, PREVIEW2, TIME2, URL2)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE3, THUMBNAIL3, PREVIEW3, TIME3, URL3)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE4, THUMBNAIL4, PREVIEW4, TIME4, URL4)))
+            adapter.add(ArticleItem(context!!, AvailArticle(TITLE5, THUMBNAIL5, PREVIEW5, TIME5, URL5)))
             val recyler = root.findViewById<RecyclerView>(R.id.recyclerview_artikel_fragment)
             recyler.adapter = adapter
         }
@@ -149,9 +157,17 @@ class ArtikelFragment : Fragment() {
                                 arrayIndex5.getString("url")
                         )
 
+                        var thumbnailArray = arrayOf(
+                                arrayIndex1.getString("thumbnail"),
+                                arrayIndex2.getString("thumbnail"),
+                                arrayIndex3.getString("thumbnail"),
+                                arrayIndex4.getString("thumbnail"),
+                                arrayIndex5.getString("thumbnail")
+                        )
+
                         var artikelSession: ArtikelSession? = null
                         artikelSession = ArtikelSession(context!!)
-                        artikelSession.createSession(titleArray[0], titleArray[1], titleArray[2], titleArray[3], titleArray[4], previewArray[0], previewArray[1], previewArray[2], previewArray[3], previewArray[4], timeArray[0], timeArray[1], timeArray[2], timeArray[3], timeArray[4], urlArray[0], urlArray[1], urlArray[2], urlArray[3], urlArray[4])
+                        artikelSession.createSession(titleArray[0], titleArray[1], titleArray[2], titleArray[3], titleArray[4], previewArray[0], previewArray[1], previewArray[2], previewArray[3], previewArray[4], timeArray[0], timeArray[1], timeArray[2], timeArray[3], timeArray[4], urlArray[0], urlArray[1], urlArray[2], urlArray[3], urlArray[4], thumbnailArray[0], thumbnailArray[1], thumbnailArray[2], thumbnailArray[3], thumbnailArray[4])
 
                         adapter.add(ArticleItem(
                             context!!,
@@ -198,7 +214,7 @@ class ArticleItem(val context: Context, val item: AvailArticle): Item<ViewHolder
         }
         viewHolder.itemView.txtTitle_articlefrag.text = item.title
         viewHolder.itemView.txtPrev_articlefrag.text = item.preview
-        viewHolder.itemView.txtTime_articlefrag.text = item.time + "\nmins"
+        viewHolder.itemView.txtTime_articlefrag.text = item.time + " mins"
 
         viewHolder.itemView.setOnClickListener {
             val intent = Intent(context, ReadActivity::class.java)
@@ -207,4 +223,5 @@ class ArticleItem(val context: Context, val item: AvailArticle): Item<ViewHolder
             context.startActivity(intent)
         }
     }
+
 }

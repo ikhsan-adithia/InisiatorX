@@ -33,6 +33,11 @@ public class ArtikelSession {
     private static final String URL3 = "URL3";
     private static final String URL4 = "URL4";
     private static final String URL5 = "URL5";
+    private static final String THUMBNAIL1 = "THUMBNAIL1";
+    private static final String THUMBNAIL2 = "THUMBNAIL2";
+    private static final String THUMBNAIL3 = "THUMBNAIL3";
+    private static final String THUMBNAIL4 = "THUMBNAIL4";
+    private static final String THUMBNAIL5 = "THUMBNAIL5";
 
     @SuppressLint("CommitPrefEdits")
     public ArtikelSession(Context context) {
@@ -41,7 +46,7 @@ public class ArtikelSession {
         editor3 = sharedPreferences3.edit();
     }
 
-    public void createSession(String TITLE1, String TITLE2, String TITLE3, String TITLE4, String TITLE5, String PREVIEW1, String PREVIEW2, String PREVIEW3, String PREVIEW4, String PREVIEW5, String TIME1, String TIME2, String TIME3, String TIME4, String TIME5, String URL1, String URL2, String URL3, String URL4, String URL5){
+    public void createSession(String TITLE1, String TITLE2, String TITLE3, String TITLE4, String TITLE5, String PREVIEW1, String PREVIEW2, String PREVIEW3, String PREVIEW4, String PREVIEW5, String TIME1, String TIME2, String TIME3, String TIME4, String TIME5, String URL1, String URL2, String URL3, String URL4, String URL5, String THUMBNAIL1, String THUMBNAIL2, String THUMBNAIL3, String THUMBNAIL4, String THUMBNAIL5){
         editor3.putBoolean(LOGIN3, true);
         editor3.putString("TITLE1", TITLE1);
         editor3.putString("TITLE2", TITLE2);
@@ -63,6 +68,11 @@ public class ArtikelSession {
         editor3.putString("URL3", URL3);
         editor3.putString("URL4", URL4);
         editor3.putString("URL5", URL5);
+        editor3.putString("THUMBNAIL1", THUMBNAIL1);
+        editor3.putString("THUMBNAIL2", THUMBNAIL2);
+        editor3.putString("THUMBNAIL3", THUMBNAIL3);
+        editor3.putString("THUMBNAIL4", THUMBNAIL4);
+        editor3.putString("THUMBNAIL5", THUMBNAIL5);
         editor3.apply();
     }
 
@@ -88,6 +98,11 @@ public class ArtikelSession {
         user.put(URL3, sharedPreferences3.getString(URL3, null));
         user.put(URL4, sharedPreferences3.getString(URL4, null));
         user.put(URL5, sharedPreferences3.getString(URL5, null));
+        user.put(THUMBNAIL1, sharedPreferences3.getString(THUMBNAIL1, null));
+        user.put(THUMBNAIL2, sharedPreferences3.getString(THUMBNAIL2, null));
+        user.put(THUMBNAIL3, sharedPreferences3.getString(THUMBNAIL3, null));
+        user.put(THUMBNAIL4, sharedPreferences3.getString(THUMBNAIL4, null));
+        user.put(THUMBNAIL5, sharedPreferences3.getString(THUMBNAIL5, null));
         return user;
     }
 
