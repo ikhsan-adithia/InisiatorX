@@ -11,6 +11,9 @@ import com.android.volley.toolbox.Volley
 import kotlinx.android.synthetic.main.activity_event_detail.*
 import org.json.JSONException
 import org.json.JSONObject
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.HashMap
 
 class EventDetailActivity : AppCompatActivity() {
 
@@ -29,7 +32,7 @@ class EventDetailActivity : AppCompatActivity() {
         val eventWaktu = intent.getStringExtra("EVENT_WAKTU")
         val eventHarga = intent.getIntExtra("EVENT_HARGA", 0)
 
-        fetchDetail(eventTitle, eventLokasi, eventTanggal, eventWaktu)
+        fetchDetail(eventTitle, eventLokasi, eventTanggal, eventWaktu, eventHarga)
 
         rsvp.setOnClickListener {
             checkForBio(
@@ -107,11 +110,13 @@ class EventDetailActivity : AppCompatActivity() {
         eventTitle: String?,
         eventLokasi: String?,
         eventTanggal: String?,
-        eventWaktu: String?
+        eventWaktu: String?,
+        eventHarga: Int?
     ) {
         title_eventdetail.text = eventTitle
         lokasi_eventdetail.text = eventLokasi
         tanggal_eventdetail.text = eventTanggal
         waktu_eventdetail.text = eventWaktu
+        event_harga.text = "Rp. " + NumberFormat.getNumberInstance(Locale.US).format(eventHarga)
     }
 }

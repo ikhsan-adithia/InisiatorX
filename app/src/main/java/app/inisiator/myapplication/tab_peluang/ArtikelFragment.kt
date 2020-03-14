@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -24,10 +26,13 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_read.*
+import kotlinx.android.synthetic.main.avail_article_row.*
 import kotlinx.android.synthetic.main.avail_article_row.view.*
 import kotlinx.android.synthetic.main.fragment_artikel.*
 import kotlinx.android.synthetic.main.fragment_notifikasi_tab.*
@@ -38,6 +43,7 @@ class ArtikelFragment : Fragment() {
 
     private lateinit var swipeContainer: SwipeRefreshLayout
     private var view: WebView? = null
+    var jumlah = 5
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,8 +54,9 @@ class ArtikelFragment : Fragment() {
         swipeContainer = root.findViewById(R.id.swipe_artikel_tab)
 
         swipeContainer.setOnRefreshListener {
+            jumlah+=5
             artikelSession.logout()
-            fetchArtikel()
+            fetchArtikel(jumlah.toString())
             Handler().postDelayed({
                 if (swipeContainer.isRefreshing) {
                     swipeContainer.isRefreshing = false
@@ -85,7 +92,10 @@ class ArtikelFragment : Fragment() {
         val THUMBNAIL5 = user1.get("THUMBNAIL5")
         if (URL1 == null)
         {
-            fetchArtikel()
+            val shimmer : ShimmerFrameLayout
+            shimmer = root.findViewById(R.id.shimmer1)
+            shimmer.startShimmer()
+            fetchArtikel(jumlah.toString())
         }
         else{
             val adapter: GroupAdapter<*> = GroupAdapter<ViewHolder>()
@@ -96,11 +106,20 @@ class ArtikelFragment : Fragment() {
             adapter.add(ArticleItem(context!!, AvailArticle(TITLE5, THUMBNAIL5, PREVIEW5, TIME5, URL5)))
             val recyler = root.findViewById<RecyclerView>(R.id.recyclerview_artikel_fragment)
             recyler.adapter = adapter
+            val shimmer : ShimmerFrameLayout
+            val shimmerr : RelativeLayout
+            val main : LinearLayout
+            main = root.findViewById(R.id.main)
+            shimmerr = root.findViewById(R.id.shimmerrr)
+            shimmer = root.findViewById(R.id.shimmer1)
+            shimmerr.visibility = View.GONE
+            main.visibility = View.VISIBLE
+            shimmer.stopShimmer()
         }
         return root
     }
 
-    fun fetchArtikel() {
+    fun fetchArtikel(jumlah:String) {
 //        Toast.makeText(context!!, "Call fetchArticle()", Toast.LENGTH_SHORT).show()
         val strRequest = object : StringRequest(Method.POST, "https://awalspace.com/app/imbalopunyajangandiganggu/availablearticle.php",
             Response.Listener { response ->
@@ -182,6 +201,9 @@ class ArtikelFragment : Fragment() {
                         )
                     }
                     recyclerview_artikel_fragment.adapter = adapter
+                    main?.visibility = View.VISIBLE
+                    shimmerrr?.visibility = View.GONE
+                    shimmer1?.stopShimmer()
 
                 } catch (e: JSONException) {
                     Log.e("ArticleFragment", e.toString())
@@ -191,7 +213,9 @@ class ArtikelFragment : Fragment() {
 
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
-                return HashMap()
+                val params = java.util.HashMap<String, String>()
+                params["jumlah"] = jumlah
+                return params
             }
         }
 
@@ -207,14 +231,34 @@ class ArticleItem(val context: Context, val item: AvailArticle): Item<ViewHolder
 
     @SuppressLint("SetTextI18n")
     override fun bind(viewHolder: ViewHolder, position: Int) {
-        if (item.thumbnail != "") {
-            Glide.with(context).load(item.thumbnail).into(viewHolder.itemView.imgThumbnail_articlefrag)
-        } else {
-            viewHolder.itemView.imgThumbnail_articlefrag.setImageResource(R.drawable.ic_profile)
-        }
         viewHolder.itemView.txtTitle_articlefrag.text = item.title
         viewHolder.itemView.txtPrev_articlefrag.text = item.preview
         viewHolder.itemView.txtTime_articlefrag.text = item.time + " mins"
+        if(item.thumbnail.equals("1"))
+        {
+            viewHolder.itemView.image.setImageResource(R.drawable.ic_07_hat)
+            viewHolder.itemView.text.text = "#Blog\nTips & Trik"
+
+        }
+        else if(item.thumbnail.equals("2"))
+        {
+            viewHolder.itemView.image.setImageResource(R.drawable.ic_laptop_server_analysis_data_report)
+            viewHolder.itemView.text.text = "#Blog\nTeknologi"
+        }
+        else if(item.thumbnail.equals("3"))
+        {
+            viewHolder.itemView.image.setImageResource(R.drawable.ic_effort)
+            viewHolder.itemView.text.text = "#Blog\nProduktivitas"
+        }
+        else if(item.thumbnail.equals("4"))
+        {
+            viewHolder.itemView.image.setImageResource(R.drawable.ic_scholarship)
+            viewHolder.itemView.text.text = "#Blog\nBeasiswa"
+        }
+        else{
+            viewHolder.itemView.image.setImageResource(R.drawable.ic_review)
+            viewHolder.itemView.text.text = "#Blog\nUlasan"
+        }
 
         viewHolder.itemView.setOnClickListener {
             val intent = Intent(context, ReadActivity::class.java)

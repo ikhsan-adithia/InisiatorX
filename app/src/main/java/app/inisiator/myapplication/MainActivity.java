@@ -109,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
         temporarySession.logout();
         final ArtikelSession artikelSession = new ArtikelSession(this);
         artikelSession.logout();
+        final KegiatanSession kegiatanSession = new KegiatanSession(this);
+        kegiatanSession.logout();
         new Thread(new Runnable() {
             @Override
             public void run() {

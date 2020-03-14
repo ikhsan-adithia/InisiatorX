@@ -204,7 +204,7 @@ class Beranda : Fragment() {
             takebalance(emaill!!, passwordd!!)
         }
         else{
-            txtBalance?.setText(balance)
+            txtBalance?.setText(NumberFormat.getNumberInstance(Locale.US).format(balance.toInt()))
             val adapter: GroupAdapter<*> = GroupAdapter<ViewHolder>()
             adapter.add(UserItem(TopThree(nama1, point1, photo1), 1, context!!) )
             adapter.add(UserItem(TopThree(nama2, point2, photo2), 2, context!!))

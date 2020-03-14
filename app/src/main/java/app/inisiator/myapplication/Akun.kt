@@ -92,7 +92,6 @@ class Akun : Fragment() {
         txtpoint!!.text = point
         txtposition!!.text = position
         if (photo.equals("")) {
-            Toast.makeText(activity, "Kosong bang", Toast.LENGTH_SHORT).show()
         }
         else {
             val profilee = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView

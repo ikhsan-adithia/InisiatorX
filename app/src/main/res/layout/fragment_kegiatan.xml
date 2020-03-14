@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.github.ybq.android.spinkit.SpinKitView
-        android:id="@+id/spin_kit"
-        style="@style/SpinKitView.ThreeBounce"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        app:SpinKit_Color="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_kegiatan_tab"
         android:layout_width="match_parent"
@@ -40,23 +27,65 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical" >
 
+                <RelativeLayout
+                    android:id="@+id/shimmerrr"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            app:cardBackgroundColor="#EEEEEE"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="230dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            app:cardBackgroundColor="#EEEEEE"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="450dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            app:cardBackgroundColor="#EEEEEE"/>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="670dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            app:cardBackgroundColor="#EEEEEE"/>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/main"
+                android:visibility="gone"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_event_tiket"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <WebView
-                    android:id="@+id/webView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="50dp"
-                    android:visibility="invisible" />
+            </LinearLayout>
+
 
             </LinearLayout>
 

@@ -30,9 +30,6 @@ class ReadActivity : AppCompatActivity() {
             }
         }
 
-        timeProgress_read.bringToFront()
-        timeProgress_read.max = time * 60
-
         web_read.settings.javaScriptEnabled = true
         web_read.webViewClient = WebViewClient()
         web_read.loadUrl(url)
@@ -40,8 +37,8 @@ class ReadActivity : AppCompatActivity() {
             override fun onPageFinished(view: WebView?, url: String?) {
                 super.onPageFinished(view, url)
                 spinKit_read?.visibility = View.GONE
-                timeProgress_read.visibility = View.VISIBLE
                 web_read?.visibility = View.VISIBLE
+                fab_read?.visibility = View.VISIBLE
                 if (calledOnce) startCountDown(urlTimer)
             }
         }
@@ -67,8 +64,16 @@ class ReadActivity : AppCompatActivity() {
 
         override fun onTick(millisUntilFinished: Long) {
             val timeLeft = millisUntilFinished / 1000
-            timeProgress_read.progress = timeLeft.toInt()
+            fab_read.text = timeLeft.toInt().toString()
         }
 
+    }
+
+    override fun onBackPressed() {
+        if (finishedCountDown) {
+            finish()
+        } else {
+            Toast.makeText(this, "Masih ada sisa: ${fab_read.text} detik lagi", Toast.LENGTH_SHORT).show()
+        }
     }
 }
