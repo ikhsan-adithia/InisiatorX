@@ -41,8 +41,6 @@ import java.util.HashMap
 
 class KegiatanFragment : Fragment() {
 
-    private var webView: WebView? = null
-    private var spinKitView: SpinKitView? = null
     private lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreateView(

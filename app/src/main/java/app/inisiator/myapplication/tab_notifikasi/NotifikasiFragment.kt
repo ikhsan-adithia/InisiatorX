@@ -9,19 +9,24 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import app.inisiator.myapplication.QrTicketPreviewActivity
-import app.inisiator.myapplication.R
-import app.inisiator.myapplication.SessionManager
+import app.inisiator.myapplication.*
+import app.inisiator.myapplication.models.AvailableTicket
 import app.inisiator.myapplication.models.QrNotif
+import app.inisiator.myapplication.tab_peluang.TicketItem
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
+import kotlinx.android.synthetic.main.fragment_kegiatan.*
 import kotlinx.android.synthetic.main.fragment_notifikasi_tab.*
 import kotlinx.android.synthetic.main. notif_item.view.*
 import org.json.JSONArray
@@ -46,7 +51,63 @@ class NotifikasiFragment : Fragment() {
             }, 1000)
         }
 
-        fetchNotif()
+        var notifikasiSession: NotifikasiSession? = null
+        notifikasiSession = NotifikasiSession(activity)
+        val user1: java.util.HashMap<String, String> = notifikasiSession!!.notifikasiSession
+        val ARRAY = user1.get("ARRAY")
+        if (ARRAY.equals(null))
+        {
+            val shimmer : ShimmerFrameLayout
+            shimmer = root.findViewById(R.id.shimmer11)
+            shimmer.startShimmer()
+            fetchNotif()
+        }
+        else{
+            val array = JSONArray(ARRAY)
+            val adapter = GroupAdapter<ViewHolder>()
+            for (i in 0 until array.length()) {
+                val obj = array.getJSONObject(i)
+
+                val getQrcode = obj.getString("qrcode")
+                val getExpDate = obj.getString("exp_date")
+                val getTitle = obj.getString("event_title")
+                val getLokasi = obj.getString("lokasi")
+                val getWaktu = obj.getString("waktu")
+                val getEmail = obj.getString("buyer_email")
+                val getStatus = obj.getString("status")
+
+                val sessionManager =  SessionManager(activity)
+                val user: HashMap<String, String> = sessionManager.userDetail
+                val email = user["EMAIL"]
+
+                if (getEmail == email) {
+                    adapter.add(
+                            NotifItem(
+                                    QrNotif(
+                                            getQrcode,
+                                            getExpDate,
+                                            getTitle,
+                                            getLokasi,
+                                            getWaktu,
+                                            getEmail,
+                                            getStatus
+                                    ), context!!
+                            )
+                    )
+                }
+            }
+            val recyclerView = root.findViewById<RecyclerView>(R.id.fragmentnotifikasi_recyclerview)
+            recyclerView.adapter = adapter
+            val shimmer : ShimmerFrameLayout
+            val shimmerr : RelativeLayout
+            val main : LinearLayout
+            main = root.findViewById(R.id.mainn)
+            shimmerr = root.findViewById(R.id.shimmerrrr)
+            shimmer = root.findViewById(R.id.shimmer11)
+            shimmerr.visibility = View.GONE
+            main.visibility = View.VISIBLE
+            shimmer.stopShimmer()
+        }
 
         return root
     }
@@ -76,6 +137,10 @@ class NotifikasiFragment : Fragment() {
                             val email = user["EMAIL"]
 
                             if (getEmail == email) {
+                                var notifikasiSession: NotifikasiSession? = null
+                                notifikasiSession = NotifikasiSession(context!!)
+                                notifikasiSession.createSession(array)
+
                                 adapter.add(
                                         NotifItem(
                                                 QrNotif(
@@ -93,6 +158,9 @@ class NotifikasiFragment : Fragment() {
                         }
 
                         fragmentnotifikasi_recyclerview.adapter = adapter
+                        mainn?.visibility = View.VISIBLE
+                        shimmerrrr?.visibility = View.GONE
+                        shimmer11?.stopShimmer()
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }

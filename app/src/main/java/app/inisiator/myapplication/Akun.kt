@@ -63,8 +63,6 @@ class Akun : Fragment() {
         txtbalance = root.findViewById(R.id.dailyScore)
         txtnameawal = root.findViewById(R.id.userName_HomeContent)
         txtemailawal = root.findViewById(R.id.userEmail_HomeContent)
-        txtpoint = root.findViewById(R.id.txtMyEnergyLeft)
-        txtposition = root.findViewById(R.id.txtMyRank)
 
         val profilee = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
         val logout = root.findViewById<View>(R.id.logoutLayout)
@@ -89,8 +87,6 @@ class Akun : Fragment() {
         txtemailawal!!.text = email
         txtnameawal!!.text = nama
         txtreferral!!.text = referral
-        txtpoint!!.text = point
-        txtposition!!.text = position
         if (photo.equals("")) {
         }
         else {

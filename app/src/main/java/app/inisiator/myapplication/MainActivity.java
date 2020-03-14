@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         artikelSession.logout();
         final KegiatanSession kegiatanSession = new KegiatanSession(this);
         kegiatanSession.logout();
+        final NotifikasiSession notifikasiSession = new NotifikasiSession(this);
+        notifikasiSession.logout();
         new Thread(new Runnable() {
             @Override
             public void run() {
