@@ -175,7 +175,7 @@ public class Register extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                        utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
                                         dua.setVisibility(View.VISIBLE);
                                         spinKitView.setVisibility(View.INVISIBLE);
                                         main.setVisibility(View.VISIBLE);
@@ -188,7 +188,7 @@ public class Register extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                        utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
                                         dua.setVisibility(View.VISIBLE);
                                         spinKitView.setVisibility(View.INVISIBLE);
                                         main.setVisibility(View.VISIBLE);
@@ -200,7 +200,7 @@ public class Register extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                        utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
                                         dua.setVisibility(View.VISIBLE);
                                         spinKitView.setVisibility(View.INVISIBLE);
                                         main.setVisibility(View.VISIBLE);

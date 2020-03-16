@@ -31,8 +31,9 @@ class EventDetailActivity : AppCompatActivity() {
         val eventTanggal = intent.getStringExtra("EVENT_TANGGAL")
         val eventWaktu = intent.getStringExtra("EVENT_WAKTU")
         val eventHarga = intent.getIntExtra("EVENT_HARGA", 0)
+        val eventKeterangan = intent.getStringExtra("EVENT_KETERANGAN")
 
-        fetchDetail(eventTitle, eventLokasi, eventTanggal, eventWaktu, eventHarga)
+        fetchDetail(eventTitle, eventLokasi, eventTanggal, eventWaktu, eventHarga, eventKeterangan)
 
         rsvp.setOnClickListener {
             checkForBio(
@@ -42,7 +43,8 @@ class EventDetailActivity : AppCompatActivity() {
                 eventLokasi,
                 eventTanggal,
                 eventWaktu,
-                eventHarga
+                eventHarga,
+                    eventKeterangan
             )
         }
     }
@@ -54,7 +56,8 @@ class EventDetailActivity : AppCompatActivity() {
         lokasi: String?,
         tanggal: String?,
         waktu: String?,
-        harga: Int?
+        harga: Int?,
+        keterangan: String?
     ) {
         val url = "https://awalspace.com/app/imbalopunyajangandiganggu/profile.php"
         val strReq = object : StringRequest(Method.POST, url,
@@ -82,6 +85,7 @@ class EventDetailActivity : AppCompatActivity() {
                                 intent.putExtra("EVENT_WAKTU", waktu)
                                 intent.putExtra("EVENT_HARGA", harga)
                                 intent.putExtra("MY_BALANCE", balance.toInt())
+                                intent.putExtra("EVENT_KETERANGAN", keterangan)
                                 startActivity(intent)
                                 finish()
                             }
@@ -111,12 +115,14 @@ class EventDetailActivity : AppCompatActivity() {
         eventLokasi: String?,
         eventTanggal: String?,
         eventWaktu: String?,
-        eventHarga: Int?
+        eventHarga: Int?,
+        eventKeterangan: String?
     ) {
         title_eventdetail.text = eventTitle
         lokasi_eventdetail.text = eventLokasi
         tanggal_eventdetail.text = eventTanggal
         waktu_eventdetail.text = eventWaktu
-        event_harga.text = "Rp. " + NumberFormat.getNumberInstance(Locale.US).format(eventHarga)
+        event_harga.text = "CoinX " + NumberFormat.getNumberInstance(Locale.US).format(eventHarga)
+        keterangan.text = eventKeterangan
     }
 }

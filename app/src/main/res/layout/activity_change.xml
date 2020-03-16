@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Change">
+
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        android:visibility="invisible"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:SpinKit_Color="@color/colorPrimary" />
+
+
+    <ScrollView
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/card"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@color/colorPrimary">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerInParent="true"
+                    app:cardCornerRadius="100dp">
+
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/ic_password"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/card"
+                android:text="Rubah Kata Sandi"
+                android:gravity="center"
+                android:layout_marginTop="20dp"
+                android:textSize="30sp"
+                android:fontFamily="@font/sf_pro_display_bold"
+                android:textColor="@color/colorPrimary"/>
+
+            <TextView
+                android:id="@+id/subtitle"
+                android:layout_below="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Masukkan kata sandi lama dan buatlah kata sandi baru"
+                android:textSize="15dp"
+                android:gravity="center"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:textColor="#000000"
+                android:fontFamily="@font/sf_pro_display_regular"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/subtitle"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/border"
+                android:layout_marginTop="60dp"
+                android:layout_marginRight="30dp"
+                app:passwordToggleEnabled="true"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"
+                    android:backgroundTint="#CDD2D6"
+                    android:fontFamily="@font/nunito_sans_regular"
+                    android:hint="Kata Sandi Lama"
+                    android:inputType="textPassword"
+                    android:textColor="#000000"
+                    android:textColorHint="#CDD2D6"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@+id/tilPassword"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/border"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="30dp"
+                app:passwordToggleEnabled="true"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titPassword2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@null"
+                    android:backgroundTint="#CDD2D6"
+                    android:fontFamily="@font/nunito_sans_regular"
+                    android:hint="Kata Sandi Baru"
+                    android:inputType="textPassword"
+                    android:textColor="#000000"
+                    android:textColorHint="#CDD2D6"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_below="@+id/tilPassword2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="50dp"
+                android:text="Ubah"
+                android:fontFamily="@font/sf_pro_display_bold"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:background="@drawable/border"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

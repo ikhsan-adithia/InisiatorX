@@ -1,15 +1,16 @@
 package app.inisiator.myapplication.models;
 
 public class AvailableTicket {
-    private String title, lokasi, tanggal, waktu;
+    private String title, lokasi, tanggal, waktu, keterangan;
     private Integer harga;
 
-    public AvailableTicket(String title, String lokasi, String tanggal, String waktu, Integer harga) {
+    public AvailableTicket(String title, String lokasi, String tanggal, String waktu, Integer harga, String keterangan) {
         this.title = title;
         this.lokasi = lokasi;
         this.tanggal = tanggal;
         this.waktu = waktu;
         this.harga = harga;
+        this.keterangan = keterangan;
     }
 
     public AvailableTicket() {}
@@ -52,5 +53,13 @@ public class AvailableTicket {
 
     public void setHarga(Integer harga) {
         this.harga = harga;
+    }
+
+    public String getKeterangan() {
+        return keterangan;
+    }
+
+    public void setKeterangan(String keterangan) {
+        this.keterangan = keterangan;
     }
 }

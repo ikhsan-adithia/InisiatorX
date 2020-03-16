@@ -129,7 +129,7 @@ public class Login extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         // Do something after 5s = 5000ms
-                                        utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                        utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
                                         dua.setVisibility(View.VISIBLE);
                                         spin_kit.setVisibility(View.INVISIBLE);
                                         mainn.setVisibility(View.VISIBLE);
@@ -141,7 +141,7 @@ public class Login extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                                        utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
                                         dua.setVisibility(View.VISIBLE);
                                         spin_kit.setVisibility(View.INVISIBLE);
                                         mainn.setVisibility(View.VISIBLE);
@@ -151,7 +151,7 @@ public class Login extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
                             dua.setVisibility(View.VISIBLE);
                             spin_kit.setVisibility(View.INVISIBLE);
                             mainn.setVisibility(View.VISIBLE);
@@ -163,7 +163,7 @@ public class Login extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        utama.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                        utama.setBackgroundColor(Color.parseColor("#FFFFFF"));
                         dua.setVisibility(View.VISIBLE);
                         spin_kit.setVisibility(View.INVISIBLE);
                         mainn.setVisibility(View.VISIBLE);

@@ -18,7 +18,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.inisiator.myapplication.*
-import app.inisiator.myapplication.UserItem
 import app.inisiator.myapplication.models.AvailArticle
 import app.inisiator.myapplication.models.TopThree
 import com.android.volley.AuthFailureError
@@ -52,7 +51,8 @@ class ArtikelFragment : Fragment() {
         var artikelSession: ArtikelSession? = null
         artikelSession = ArtikelSession(activity)
         swipeContainer = root.findViewById(R.id.swipe_artikel_tab)
-
+        val main = MainActivity()
+        main.status(false, activity)
         swipeContainer.setOnRefreshListener {
             jumlah+=5
             artikelSession.logout()
@@ -115,6 +115,8 @@ class ArtikelFragment : Fragment() {
             shimmerr.visibility = View.GONE
             main.visibility = View.VISIBLE
             shimmer.stopShimmer()
+            val mainn = MainActivity()
+            mainn.status(true, activity)
         }
         return root
     }
@@ -204,6 +206,8 @@ class ArtikelFragment : Fragment() {
                     main?.visibility = View.VISIBLE
                     shimmerrr?.visibility = View.GONE
                     shimmer1?.stopShimmer()
+                    val main = MainActivity()
+                    main.status(true, activity)
 
                 } catch (e: JSONException) {
                     Log.e("ArticleFragment", e.toString())

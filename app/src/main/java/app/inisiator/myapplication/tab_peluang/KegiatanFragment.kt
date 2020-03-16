@@ -15,10 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import app.inisiator.myapplication.ArtikelSession
-import app.inisiator.myapplication.EventDetailActivity
-import app.inisiator.myapplication.KegiatanSession
-import app.inisiator.myapplication.R
+import app.inisiator.myapplication.*
 import app.inisiator.myapplication.models.AvailableTicket
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
@@ -50,7 +47,8 @@ class KegiatanFragment : Fragment() {
         val root =  inflater.inflate(R.layout.fragment_kegiatan, container, false)
 
         swipeContainer = root.findViewById(R.id.swipe_kegiatan_tab)
-
+        val main = MainActivity()
+        main.status(false, activity)
         swipeContainer.setOnRefreshListener {
             fetchdata()
             Handler().postDelayed({
@@ -81,13 +79,15 @@ class KegiatanFragment : Fragment() {
                 val getTanggal = jsonObject.getString("tanggal")
                 val getWaktu = jsonObject.getString("waktu")
                 val getHarga = jsonObject.getInt("harga")
+                val getKeterangan  = jsonObject.getString("keterangan")
                 adapter.add(TicketItem(
                         AvailableTicket(
                                 getTitle,
                                 getLokasi,
                                 getTanggal,
                                 getWaktu,
-                                getHarga
+                                getHarga,
+                                getKeterangan
                         ),
                         context!!
                 ))
@@ -103,6 +103,8 @@ class KegiatanFragment : Fragment() {
             shimmerr.visibility = View.GONE
             main.visibility = View.VISIBLE
             shimmer.stopShimmer()
+            val mainn = MainActivity()
+            mainn.status(true, activity)
         }
 
         return root
@@ -125,6 +127,7 @@ class KegiatanFragment : Fragment() {
                             val getTanggal = jsonObject.getString("tanggal")
                             val getWaktu = jsonObject.getString("waktu")
                             val getHarga = jsonObject.getInt("harga")
+                            val getKeterangan = jsonObject.getString("keterangan")
 
                             // Convert Y-m-d to Month, day Year / F, d Y
                             var kegiatanSession: KegiatanSession? = null
@@ -137,7 +140,8 @@ class KegiatanFragment : Fragment() {
                                             getLokasi,
                                             getTanggal,
                                             getWaktu,
-                                            getHarga
+                                            getHarga,
+                                            getKeterangan
                                     ),
                                     context!!
                             ))
@@ -147,6 +151,8 @@ class KegiatanFragment : Fragment() {
                         main?.visibility = View.VISIBLE
                         shimmerrr?.visibility = View.GONE
                         shimmer1?.stopShimmer()
+                        val main = MainActivity()
+                        main.status(true, activity)
                     } catch (e: JSONException) {
                         e.printStackTrace()
                         Log.e("Event", e.toString())
@@ -184,6 +190,7 @@ class TicketItem(val tiket: AvailableTicket,val context: Context): Item<ViewHold
             intent.putExtra("EVENT_TANGGAL", tiket.tanggal)
             intent.putExtra("EVENT_WAKTU", tiket.waktu)
             intent.putExtra("EVENT_HARGA", tiket.harga.toInt())
+            intent.putExtra("EVENT_KETERANGAN", tiket.keterangan)
             context.startActivity(intent)
         }
     }

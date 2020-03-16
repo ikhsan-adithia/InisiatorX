@@ -41,7 +41,8 @@ class NotifikasiFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_notifikasi_tab, container, false)
 
         swipeContainer = root.findViewById(R.id.swipe_notif_tab)
-
+        val main = MainActivity()
+        main.status(false, activity)
         swipeContainer.setOnRefreshListener {
             fetchNotif()
             Handler().postDelayed({
@@ -107,6 +108,8 @@ class NotifikasiFragment : Fragment() {
             shimmerr.visibility = View.GONE
             main.visibility = View.VISIBLE
             shimmer.stopShimmer()
+            val mainn = MainActivity()
+            mainn.status(true, activity)
         }
 
         return root
@@ -161,6 +164,8 @@ class NotifikasiFragment : Fragment() {
                         mainn?.visibility = View.VISIBLE
                         shimmerrrr?.visibility = View.GONE
                         shimmer11?.stopShimmer()
+                        val main = MainActivity()
+                        main.status(true, activity)
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }

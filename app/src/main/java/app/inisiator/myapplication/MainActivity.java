@@ -76,6 +76,30 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void status (Boolean bl, FragmentActivity activity){
+        if(bl == true)
+        {
+            View beranda = activity.findViewById(R.id.beranda);
+            View peluang = activity.findViewById(R.id.peluang);
+            View notifikasi = activity.findViewById(R.id.notifikasi);
+            View akun = activity.findViewById(R.id.akun);
+            beranda.setEnabled(true);
+            peluang.setEnabled(true);
+            notifikasi.setEnabled(true);
+            akun.setEnabled(true);
+        }
+        else {
+            View beranda = activity.findViewById(R.id.beranda);
+            View peluang = activity.findViewById(R.id.peluang);
+            View notifikasi = activity.findViewById(R.id.notifikasi);
+            View akun = activity.findViewById(R.id.akun);
+            beranda.setEnabled(false);
+            peluang.setEnabled(false);
+            notifikasi.setEnabled(false);
+            akun.setEnabled(false);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -113,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
         kegiatanSession.logout();
         final NotifikasiSession notifikasiSession = new NotifikasiSession(this);
         notifikasiSession.logout();
+        final TransaksiSession transaksiSession = new TransaksiSession(this);
+        transaksiSession.logout();
         new Thread(new Runnable() {
             @Override
             public void run() {

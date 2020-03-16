@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,70 +7,40 @@
     tools:context=".TicketPaymentActivity"
     android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ticketpayment_spin_kit"
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_kit"
+        android:visibility="invisible"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:SpinKit_Color="@color/colorPrimary" />
+
+    <ScrollView
+        android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
 
-        <com.github.ybq.android.spinkit.SpinKitView
-            style="@style/SpinKitView.ThreeBounce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:visibility="visible"
-            app:SpinKit_Color="@color/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/ticketPaymentLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible"
-        android:orientation="vertical">
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary">
+            android:orientation="vertical" >
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/ticketpayment_spin_kit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:visibility="gone">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/bg_event"
-                    tools:ignore="ContentDescription" />
-
-                <TextView
-                    android:id="@+id/event_title_pay"
-                    android:layout_width="match_parent"
+                <com.github.ybq.android.spinkit.SpinKitView
+                    style="@style/SpinKitView.ThreeBounce"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginEnd="60dp"
-                    android:layout_marginBottom="50dp"
-                    android:background="@drawable/event_title_pay"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:gravity="center"
-                    android:padding="25dp"
-                    android:text="Title titletitas daasdseltitleti"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="24sp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="visible"
+                    app:SpinKit_Color="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -78,177 +48,294 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </FrameLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <LinearLayout
+                android:id="@+id/ticketPaymentLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toTopOf="@+id/btnBayar_tiket"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="LOKASI"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/event_loc_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="Jl.Gaperta"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="TANGGAL"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/event_tanggal_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="2020-02-14"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="WAKTU"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/event_time_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="10am-12pm"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="HARGA"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/event_price_pay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="10000"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <TextView
+                <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="8dp"
-                    android:gravity="end"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="My Balance"
-                    android:textSize="12sp" />
+                    android:background="@color/colorPrimary">
 
-                <TextView
-                    android:id="@+id/my_balance_pay_tiket"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:gravity="end"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="10000"
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/event_price_"
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/bg_event"
+                            tools:ignore="ContentDescription" />
+
+                        <TextView
+                            android:id="@+id/event_title_pay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="60dp"
+                            android:layout_marginTop="50dp"
+                            android:layout_marginEnd="60dp"
+                            android:layout_marginBottom="50dp"
+                            android:background="@drawable/event_title_pay"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:gravity="center"
+                            android:padding="25dp"
+                            android:text="Title titletitas daasdseltitleti"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </FrameLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:gravity="end"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:text="10000"
-                    android:textColor="#646464"
-                    android:textSize="16sp" />
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="LOKASI"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/event_loc_pay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Jl.Gaperta"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="TANGGAL"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/event_tanggal_pay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="2020-02-14"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="WAKTU"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/event_time_pay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="10am-12pm"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="HARGA"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/event_price_pay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="10000"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="KODE PROMO"
+                            android:textSize="16sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginRight="20dp"
+                            android:layout_weight="4"
+                            android:layout_marginEnd="25dp"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/titasd"
+                                android:layout_width="0dp"
+                                android:layout_weight="3"
+                                android:layout_marginRight="10dp"
+                                android:layout_height="wrap_content"
+                                app:errorEnabled="true">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/kode"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="#CDD2D6"
+                                    android:fontFamily="@font/nunito_sans_regular"
+                                    android:hint="Kode Promo"
+                                    android:inputType="text"
+                                    android:textColor="#000000"
+                                    android:textColorHint="#CDD2D6"
+                                    android:textSize="14sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <Button
+                                android:id="@+id/check"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="30dp"
+                                android:background="@drawable/rounded_corner_5dp"
+                                android:backgroundTint="@color/colorPrimary"
+                                android:text="Check Kode"
+                                android:textColor="#ffffff"
+                                android:textSize="10sp"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginEnd="25dp"
+                            android:layout_marginTop="8dp"
+                            android:gravity="end"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="My Balance"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/my_balance_pay_tiket"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginEnd="25dp"
+                            android:gravity="end"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="10000"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/event_price_"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginEnd="25dp"
+                            android:gravity="end"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Harga -0"
+                            android:textColor="#646464"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/event_diskon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="25dp"
+                            android:layout_marginEnd="25dp"
+                            android:gravity="end"
+                            android:fontFamily="sans-serif-condensed-medium"
+                            android:text="Diskon -0"
+                            android:textColor="#646464"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:background="#345F5F5F"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/my_balance_aftertransaction_tiket"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="25dp"
+                                android:layout_marginEnd="20dp"
+                                android:fontFamily="sans-serif-condensed-medium"
+                                android:gravity="end"
+                                android:text="10000"
+                                android:textColor="@color/black"
+                                android:textSize="22sp" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <Button
+                    android:id="@+id/btnBayar_tiket"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="#345F5F5F"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:id="@+id/my_balance_aftertransaction_tiket"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="20dp"
-                        android:fontFamily="sans-serif-condensed-medium"
-                        android:gravity="end"
-                        android:text="10000"
-                        android:textColor="@color/black"
-                        android:textSize="22sp" />
-
-                </RelativeLayout>
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="20dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:background="@drawable/rounded_corner_5dp"
+                    android:text="BAYAR"
+                    android:textColor="@color/button_text_color"
+                    android:textSize="18sp"/>
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnBayar_tiket"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimary"
-                android:fontFamily="@font/nunito_sans_bold"
-                android:padding="17dp"
-                android:text="BAYAR"
-                android:textColor="@color/button_text_color"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+        </LinearLayout>
+    </ScrollView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

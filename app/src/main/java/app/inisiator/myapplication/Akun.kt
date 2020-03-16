@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -63,7 +64,8 @@ class Akun : Fragment() {
         txtbalance = root.findViewById(R.id.dailyScore)
         txtnameawal = root.findViewById(R.id.userName_HomeContent)
         txtemailawal = root.findViewById(R.id.userEmail_HomeContent)
-
+        val main = MainActivity()
+        main.status(false, activity)
         val profilee = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
         val logout = root.findViewById<View>(R.id.logoutLayout)
         val changep = root.findViewById<View>(R.id.passwordLayout)
@@ -77,6 +79,11 @@ class Akun : Fragment() {
         val referral = user1.get("REFERRAl")
         val point = user1.get("POINT")
         val position = user1.get("POSITION")
+
+        changep.setOnClickListener{
+            startActivity(Intent(activity, Change::class.java))
+        }
+
         profilee.setOnClickListener {chooseFile()}
         logout.setOnClickListener {signOutUser() }
 
@@ -92,6 +99,7 @@ class Akun : Fragment() {
         else {
             val profilee = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
             Glide.with(activity!!).load(photo).into(profilee)}
+        main.status(true, activity)
         return root
     }
 

@@ -6,21 +6,28 @@ import android.graphics.Color
 import android.media.MediaScannerConnection
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import app.inisiator.myapplication.R
 import app.inisiator.myapplication.SessionManager
 import com.android.volley.AuthFailureError
+import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.github.ybq.android.spinkit.SpinKitView
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
+import kotlinx.android.synthetic.main.activity_pin.*
 import kotlinx.android.synthetic.main.activity_ticket_payment.*
+import kotlinx.android.synthetic.main.activity_ticket_payment.kode
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
@@ -32,6 +39,7 @@ import java.util.HashMap
 class TicketPaymentActivity : AppCompatActivity() {
 
     private var bitmap: Bitmap? = null
+    var totalbayar = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +55,7 @@ class TicketPaymentActivity : AppCompatActivity() {
         val myBalance = intent.getIntExtra("MY_BALANCE", 0)
 
         val myBalanceAfterTransaction = myBalance - eventHarga
-
+        totalbayar = myBalanceAfterTransaction
         val sessionManager =  SessionManager(this)
         val user: HashMap<String, String> = sessionManager.userDetail
         val email = user["EMAIL"]
@@ -67,6 +75,14 @@ class TicketPaymentActivity : AppCompatActivity() {
             myBalance,
             myBalanceAfterTransaction
         )
+
+        check.setOnClickListener{
+            checkkode(kode.text.toString(), eventHarga)
+            val main = findViewById<ScrollView>(R.id.main)
+            val spinkit = findViewById<SpinKitView>(R.id.spin_kit)
+            main.visibility = View.INVISIBLE
+            spinkit.visibility = View.VISIBLE
+        }
 
         btnBayar_tiket.setOnClickListener {
             if (!buttonBayar) {
@@ -102,7 +118,7 @@ class TicketPaymentActivity : AppCompatActivity() {
                         eventLokasi,
                         eventWaktu,
                         email,
-                        myBalanceAfterTransaction
+                            Integer.parseInt(my_balance_aftertransaction_tiket.text.toString())
                     )
 
 //                    showToast("QRCode saved to -> $path")
@@ -242,7 +258,7 @@ class TicketPaymentActivity : AppCompatActivity() {
         event_tanggal_pay.text = eventTanggal
         event_time_pay.text = eventWaktu
         event_price_pay.text = eventHarga.toString()
-        event_price_.text = eventHarga.toString()
+        event_price_.text = "Harga -"+eventHarga.toString()
         my_balance_pay_tiket.text = myBalance.toString()
 
         my_balance_aftertransaction_tiket.text = myBalanceAfterTransaction.toString()
@@ -251,6 +267,90 @@ class TicketPaymentActivity : AppCompatActivity() {
     companion object {
         const val QRcodeWidth = 300
         private const val IMAGE_DIRECTORY = "/inisiatorX/qrTicketEvent"
+    }
+
+    private fun checkkode(kode: String, totall: Int) {
+        val URL_KODE = "https://awalspace.com/app/imbalopunyajangandiganggu/kode.php"
+        val stringRequest = object : StringRequest(Request.Method.POST, URL_KODE,
+                Response.Listener { response ->
+                    try {
+                        val jsonObject = JSONObject(response)
+                        val success = jsonObject.getString("success")
+                        val jsonArray = jsonObject.getJSONArray("check")
+                        if (success.equals("1")) {
+                            for (i in 0 until jsonArray.length()) {
+                                var `object` = jsonArray.getJSONObject(i)
+                                var potongan = `object`.getInt("potongan")
+                                event_diskon.text = "Diskon -"+potongan.toString()
+                                val mmnt = Integer.parseInt(potongan.toString())
+                                hitung(totall, mmnt)
+                            }
+                        }
+                        else if(success.equals("2"))
+                        {
+                            val txtkode = findViewById<EditText>(R.id.kode)
+                            txtkode.setText("")
+                            Toast.makeText(this, "Kode Promo Sudah Tidak Bisa Dipakai", Toast.LENGTH_SHORT).show()
+                            event_diskon.text = "Diskon -0"
+                            hitung(totall, 0)
+                        }
+                        else if (success.equals("0")) {
+                            val txtkode = findViewById<EditText>(R.id.kode)
+                            txtkode.setText("")
+                            Toast.makeText(this, "Kode Tidak Ditemukan", Toast.LENGTH_SHORT).show()
+                            event_diskon.text = "Diskon -0"
+                            hitung(totall, 0)
+                        }
+                        else if(success.equals("3")){
+                            val txtkode = findViewById<EditText>(R.id.kode)
+                            txtkode.setText("")
+                            Toast.makeText(this, "Kode Promo Tidak Bisa Dipakai Karena Tidak Mencukupi Batas Minimal Harga", Toast.LENGTH_SHORT).show()
+                            event_diskon.text = "Diskon -0"
+                            hitung(totall, 0)
+                        }
+
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        val main = findViewById<ScrollView>(R.id.main)
+                        val spinkit = findViewById<SpinKitView>(R.id.spin_kit)
+                        main.visibility = View.VISIBLE
+                        spinkit.visibility = View.INVISIBLE
+                        Toast.makeText(this, "Try Again!", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
+                    }
+                }, Response.ErrorListener { error -> }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                var sessionManager = SessionManager(this@TicketPaymentActivity)
+                var user: HashMap<String, String> = sessionManager.userDetail
+                var emaill = user.get("EMAIL")
+                val params = java.util.HashMap<String, String>()
+                params.put("kode", kode)
+                params.put("email", emaill.toString())
+                params.put("total", totall.toString())
+                return params
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(this)
+        requestQueue.add(stringRequest)
+    }
+
+    private fun hitung(totall: Int, kode: Int) {
+        val awal = Integer.parseInt(my_balance_pay_tiket.text.toString())
+        val akhir = kode
+        val ttlbyr = awal - (totall - akhir)
+        totalbayar = ttlbyr
+        if (ttlbyr <= 0) {
+            event_price_.text = my_balance_pay_tiket.toString()
+        } else {
+            my_balance_aftertransaction_tiket.text = ttlbyr.toString()
+        }
+        Handler().postDelayed({
+            val main = findViewById<ScrollView>(R.id.main)
+            val spin_kit = findViewById<SpinKitView>(R.id.spin_kit)
+            main.visibility = View.VISIBLE
+            spin_kit.visibility = View.INVISIBLE
+        }, 1000)
     }
 
 }

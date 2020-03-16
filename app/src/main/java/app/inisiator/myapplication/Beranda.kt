@@ -64,7 +64,6 @@ class Beranda : Fragment() {
                               savedInstanceState: Bundle?): View? {
         root = inflater.inflate(R.layout.fragment_beranda, container, false)
         val lainnya = root.findViewById<Button>(R.id.btnLainnya)
-        val btnRequest = root.findViewById<Button>(R.id.btnRequest)
         var sessionManager = SessionManager(activity)
         val user: HashMap<String, String> = sessionManager.userDetail
         val no = user.get("NO")
@@ -74,7 +73,8 @@ class Beranda : Fragment() {
         val photo = user.get("PHOTO")
         temporarySession = TemporarySession(activity)
         swipeContainer = root.findViewById(R.id.swipe_home)
-
+        val main = MainActivity()
+        main.status(false, activity)
         swipeContainer.setOnRefreshListener {
             takebalance(emaill!!, passwordd!!)
             Handler().postDelayed({
@@ -187,15 +187,7 @@ class Beranda : Fragment() {
         txtUserEmail?.text = emaill
         val user1: HashMap<String, String> = temporarySession!!.temporarySession
         val balance = user1.get("BALANCE")
-        val nama1 = user1.get("NAMA1")
-        val nama2 = user1.get("NAMA2")
-        val nama3 = user1.get("NAMA3")
-        val point1 = user1.get("POINT1")
-        val point2 = user1.get("POINT2")
-        val point3 = user1.get("POINT3")
-        val photo1 = user1.get("PHOTO1")
-        val photo2 = user1.get("PHOTO2")
-        val photo3 = user1.get("PHOTO3")
+
         val shimmer = root.findViewById<ShimmerFrameLayout>(R.id.shimmer1)
         val userdetails = root.findViewById<RelativeLayout>(R.id.userDetailsHome)
         val spinKitView = root.findViewById<SpinKitView>(R.id.spin_kit)
@@ -205,15 +197,12 @@ class Beranda : Fragment() {
         }
         else{
             txtBalance?.setText(NumberFormat.getNumberInstance(Locale.US).format(balance.toInt()))
-            val adapter: GroupAdapter<*> = GroupAdapter<ViewHolder>()
-            adapter.add(UserItem(TopThree(nama1, point1, photo1), 1, context!!) )
-            adapter.add(UserItem(TopThree(nama2, point2, photo2), 2, context!!))
-            adapter.add(UserItem(TopThree(nama3, point3, photo3), 3, context!!))
-            recyclerView!!.adapter = adapter
             shimmer.visibility = View.GONE
             spinKitView.visibility = View.GONE
             recyclerView!!.visibility = View.VISIBLE
             userdetails.visibility = View.VISIBLE
+            val main = MainActivity()
+            main.status(true, activity)
         }
 
         return root
@@ -236,9 +225,20 @@ class Beranda : Fragment() {
                                 myBalance?.text = NumberFormat.getNumberInstance(Locale.US).format(balanceint)
                                 var referral = `object`.getString("referral").trim()
                                 var point = `object`.getString("point").trim()
-                                fetchTopThree(balanceint.toString(), referral , point)
+                                temporarySession!!.createSession(balanceint.toString(), referral , point)
+                                val shimmer = root.findViewById<ShimmerFrameLayout>(R.id.shimmer1)
+                                val userdetails = root.findViewById<RelativeLayout>(R.id.userDetailsHome)
+                                val spinKitView = root.findViewById<SpinKitView>(R.id.spin_kit)
+                                recyclerView = root.findViewById(R.id.berandaTopThree_recyclerview)
+                                shimmer.stopShimmer()
+                                spinKitView.visibility = View.GONE
+                                recyclerView!!.visibility = View.VISIBLE
+                                shimmer.visibility = View.GONE
+                                userdetails.visibility = View.VISIBLE
                             }
 
+                            val main = MainActivity()
+                            main.status(true, activity)
                         }
                     } catch (e: JSONException) {
                         e.printStackTrace()
@@ -293,75 +293,6 @@ class Beranda : Fragment() {
                 return params
             }
         }
-        val requestQueue = Volley.newRequestQueue(activity)
-        requestQueue.add(stringRequest)
-    }
-
-    private fun fetchTopThree(balance:String, referral:String, point:String) {
-        val url = "https://awalspace.com/app/imbalopunyajangandiganggu/leaderboard.php"
-        val stringRequest: StringRequest = object : StringRequest(Method.POST, url,
-                Response.Listener { response ->
-                    val adapter: GroupAdapter<*> = GroupAdapter<ViewHolder>()
-                    var index = 0
-                    try {
-                        val array = JSONArray(response)
-                        for (i in 0 until array.length()) {
-                            val jsonObject = array.getJSONObject(i)
-                            index++
-                            val getNama = jsonObject.getString("name")
-                            val getPoint = jsonObject.getString("point")
-                            val getPhoto = jsonObject.getString("photo")
-                            if (index < 4) {
-                                adapter.add(UserItem(
-                                        TopThree(getNama, getPoint, getPhoto), index,context!!
-                                ))
-                                val shimmer = root.findViewById<ShimmerFrameLayout>(R.id.shimmer1)
-                                val userdetails = root.findViewById<RelativeLayout>(R.id.userDetailsHome)
-                                val spinKitView = root.findViewById<SpinKitView>(R.id.spin_kit)
-                                recyclerView = root.findViewById(R.id.berandaTopThree_recyclerview)
-                                shimmer.stopShimmer()
-                                spinKitView.visibility = View.GONE
-                                recyclerView!!.visibility = View.VISIBLE
-                                shimmer.visibility = View.GONE
-                                userdetails.visibility = View.VISIBLE
-                            }
-                        }
-
-                        val arrayIndex1 = array.getJSONObject(0)
-                        val arrayIndex2 = array.getJSONObject(1)
-                        val arrayIndex3 = array.getJSONObject(2)
-                        var namaArray = arrayOf(
-                                arrayIndex1.getString("name"),
-                                arrayIndex2.getString("name"),
-                                arrayIndex3.getString("name")
-                        )
-
-                        var pointArray = arrayOf(
-                                arrayIndex1.getString("point"),
-                                arrayIndex2.getString("point"),
-                                arrayIndex3.getString("point")
-                        )
-
-                        var photoArray = arrayOf(
-                                arrayIndex1.getString("photo"),
-                                arrayIndex2.getString("photo"),
-                                arrayIndex3.getString("photo")
-                        )
-
-
-                        temporarySession!!.createSession(balance, namaArray[0],namaArray[1],namaArray[2], pointArray[0], pointArray[1], pointArray[2], photoArray[0], photoArray[1], photoArray[2], referral , point, "Periksa")
-
-                        berandaTopThree_recyclerview.adapter = adapter
-                    } catch (e: JSONException) {
-                    }
-                }, Response.ErrorListener {
-        }) {
-            @Throws(AuthFailureError::class)
-            override fun getParams(): Map<String, String> {
-                return HashMap()
-            }
-        }
-
         val requestQueue = Volley.newRequestQueue(activity)
         requestQueue.add(stringRequest)
     }
@@ -627,130 +558,5 @@ class Beranda : Fragment() {
         }
         val requestQueue = Volley.newRequestQueue(activity)
         requestQueue.add(stringRequest)
-    }
-}
-
-internal class UserItem(val topThree: TopThree, val index: Int?, val context: Context) : Item<ViewHolder>() {
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-
-        if (topThree.photo != "") {
-            Glide.with(context).load(topThree.photo).into(viewHolder.itemView.profilePicture_lb)
-        } else {
-            viewHolder.itemView.profilePicture_lb.setImageResource(R.drawable.profile_inisiator)
-        }
-
-
-        viewHolder.itemView.peringkat.text = "Top ${index.toString()} Global"
-        viewHolder.itemView.menu_label.text = "${index.toString()}"
-        viewHolder.itemView.name.text = topThree.nama
-        viewHolder.itemView.item_big_point.text = "Point " + topThree.point.toString()
-
-        viewHolder.itemView.showLeaderboard.setOnClickListener {
-            // TODO: Open Leaderboard Dialog
-            val dialogView = LayoutInflater.from(context).inflate(R.layout.alertdialog_leaderboard, null)
-            val builder = AlertDialog.Builder(context).setView(dialogView).show()
-            builder.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-            var sessionManager = SessionManager(context)
-            val user: HashMap<String, String> = sessionManager.userDetail
-            val nama = user.get("NAMA")
-
-            val stringRequest = object : StringRequest(Method.POST, "https://awalspace.com/app/imbalopunyajangandiganggu/leaderboardlist.php",
-                    Response.Listener { response ->
-                        val adapter = GroupAdapter<ViewHolder>()
-                        var index = 0
-
-                        try {
-                            val array = JSONArray(response)
-
-                            for (i in 0 until array.length()) {
-                                val jsonObject = array.getJSONObject(i)
-
-                                index++
-
-                                val getName = jsonObject.getString("name")
-                                val getPoint = jsonObject.getString("point")
-                                val getPhoto = jsonObject.getString("photo")
-
-                                adapter.add(LeaderboardItem(
-                                        LeaderBoard(
-                                                getName,
-                                                getPoint,
-                                                getPhoto
-                                        ), index
-                                ))
-
-                                if (getName == nama) {
-                                    dialogView.txtMyPosition_dialogleaderboad.text = index.toString()
-                                    when (index % 10) {
-                                        1 -> dialogView.txtMyPositionSufix_dialogleaderboad.text = "st"
-                                        2 -> dialogView.txtMyPositionSufix_dialogleaderboad.text = "nd"
-                                        3 -> dialogView.txtMyPositionSufix_dialogleaderboad.text = "rd"
-                                        else -> dialogView.txtMyPositionSufix_dialogleaderboad.text = "th"
-                                    }
-                                    if (getPhoto != "") {
-                                        Glide.with(context).load(getPhoto).into(dialogView.imgMyPhoto_diaogleaderboard)
-                                    } else {
-                                        dialogView.imgMyPhoto_diaogleaderboard.setImageResource(R.drawable.profile_inisiator)
-                                    }
-                                    dialogView.txtMyPoints_dialogleaderboad.text = getPoint
-
-                                    val temporarySession = TemporarySession(context)
-                                    val user1: HashMap<String, String> = temporarySession!!.temporarySession
-                                    val balance = user1.get("BALANCE")
-                                    val nama1 = user1.get("NAMA1")
-                                    val nama2 = user1.get("NAMA2")
-                                    val nama3 = user1.get("NAMA3")
-                                    val point1 = user1.get("POINT1")
-                                    val point2 = user1.get("POINT2")
-                                    val point3 = user1.get("POINT3")
-                                    val photo1 = user1.get("PHOTO1")
-                                    val photo2 = user1.get("PHOTO2")
-                                    val photo3 = user1.get("PHOTO3")
-                                    val referral = user1.get("REFERRAl")
-                                    val point = user1.get("POINT")
-                                    temporarySession.logout()
-                                    temporarySession.createSession(balance, nama1,nama2,nama3, point1, point2, point3, photo1, photo2, photo3, referral , point, index.toString())
-                                }
-                            }
-
-                            dialogView.rv_dialogleaderboard.adapter = adapter
-                        } catch (e: JSONException) {
-                            Log.e("Leaderboard", e.toString())
-                        }
-
-                    }, Response.ErrorListener { }) {
-
-                @Throws(AuthFailureError::class)
-                override fun getParams(): Map<String, String> {
-                    return HashMap()
-                }
-            }
-
-            val requestQueue = Volley.newRequestQueue(context)
-            requestQueue.add(stringRequest)
-
-        }
-    }
-
-override fun getLayout(): Int {
-    return R.layout.item_big_3
-}
-}
-
-class LeaderboardItem(private val user: LeaderBoard, private val indexPosition: Int): Item<ViewHolder>() {
-    override fun getLayout(): Int {
-        return R.layout.item_leaderboard
-    }
-
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        if (user.photo != "") {
-            Glide.with(viewHolder.itemView).load(user.photo).into(viewHolder.itemView.imgProfile_leaderboarditem)
-        } else {
-            viewHolder.itemView.imgProfile_leaderboarditem.setImageResource(R.drawable.profile_inisiator)
-        }
-        viewHolder.itemView.txtPosition_leaderboarditem.text = indexPosition.toString()
-        viewHolder.itemView.txtName_leaderboarditem.text = user.name
-        viewHolder.itemView.txtPoints_leaderboarditem.text = user.point.toString()
     }
 }

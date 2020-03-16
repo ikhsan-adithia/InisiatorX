@@ -36,23 +36,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/close"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:src="@drawable/ic_close_white"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
                 <TextView
                     android:id="@+id/title_eventdetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/close"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginRight="20dp"
                     android:fontFamily="@font/sf_pro_display_regular"
                     android:text="The InisiatorX"
@@ -203,12 +193,12 @@
                 android:layout_below="@+id/separator3"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
-                android:text="Keterangan Reservasi"
+                android:text="Keterangan Event"
                 android:textColor="#000000"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/last"
+                android:id="@+id/keterangan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ket"
@@ -222,7 +212,7 @@ yang ada di bawah ini, jika anda belum melengkapi biodata anda akan diarahkan un
                 android:id="@+id/rsvp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_below="@+id/last"
+                android:layout_below="@+id/keterangan"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginRight="20dp"
