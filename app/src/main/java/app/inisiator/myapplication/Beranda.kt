@@ -1,16 +1,11 @@
 package app.inisiator.myapplication
 
-import android.app.AlertDialog
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,8 +13,6 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import app.inisiator.myapplication.models.LeaderBoard
-import app.inisiator.myapplication.models.TopThree
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -29,15 +22,7 @@ import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.github.ybq.android.spinkit.SpinKitView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
-import com.xwray.groupie.ViewHolder
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.android.synthetic.main.alertdialog_leaderboard.view.*
-import kotlinx.android.synthetic.main.fragment_beranda.*
-import kotlinx.android.synthetic.main.item_big_3.view.*
-import kotlinx.android.synthetic.main.item_leaderboard.view.*
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.NumberFormat
@@ -50,7 +35,7 @@ class Beranda : Fragment() {
     private var txtBalance: TextView? = null
     private var recyclerView: RecyclerView? = null
     private lateinit var root: View
-    var temporarySession: TemporarySession? = null
+    var sessionManager: SessionManager? = null
     private lateinit var swipeContainer: SwipeRefreshLayout
     var keren = 0
     private val URL_FIND = "https://awalspace.com/app/imbalopunyajangandiganggu/findsend.php"
@@ -71,7 +56,10 @@ class Beranda : Fragment() {
         val passwordd = user.get("PASSWORD")
         val nama = user.get("NAMA")
         val photo = user.get("PHOTO")
-        temporarySession = TemporarySession(activity)
+        val balance = user.get("BALANCE")
+        val referral = user.get("REFERRAL")
+        val point = user.get("POINT")
+        sessionManager = SessionManager(activity)
         swipeContainer = root.findViewById(R.id.swipe_home)
         val main = MainActivity()
         main.status(false, activity)
@@ -185,47 +173,44 @@ class Beranda : Fragment() {
         }
         txtUserName?.text = nama
         txtUserEmail?.text = emaill
-        val user1: HashMap<String, String> = temporarySession!!.temporarySession
-        val balance = user1.get("BALANCE")
 
         val shimmer = root.findViewById<ShimmerFrameLayout>(R.id.shimmer1)
         val userdetails = root.findViewById<RelativeLayout>(R.id.userDetailsHome)
         val spinKitView = root.findViewById<SpinKitView>(R.id.spin_kit)
-        if (balance == null){
-            shimmer.startShimmer()
-            takebalance(emaill!!, passwordd!!)
-        }
-        else{
-            txtBalance?.setText(NumberFormat.getNumberInstance(Locale.US).format(balance.toInt()))
-            shimmer.visibility = View.GONE
-            spinKitView.visibility = View.GONE
-            recyclerView!!.visibility = View.VISIBLE
-            userdetails.visibility = View.VISIBLE
-            val main = MainActivity()
-            main.status(true, activity)
-        }
+        txtBalance?.setText(NumberFormat.getNumberInstance(Locale.US).format(balance!!.toInt()))
+        shimmer.visibility = View.GONE
+        spinKitView.visibility = View.GONE
+        recyclerView!!.visibility = View.VISIBLE
+        userdetails.visibility = View.VISIBLE
+        main.status(true, activity)
 
         return root
     }
 
     fun takebalance(email: String, password: String) {
-        val url = "https://awalspace.com/app/imbalopunyajangandiganggu/balance.php"
+        val url = "https://awalspace.com/app/imbalopunyajangandiganggu/login.php"
         val stringRequest = object : StringRequest(Request.Method.POST, url,
                 Response.Listener { response ->
                     try {
                         val jsonObject = JSONObject(response)
                         val success = jsonObject.getString("success")
-                        val jsonArray = jsonObject.getJSONArray("profile")
+                        val jsonArray = jsonObject.getJSONArray("login")
 
                         if (success == "1") {
                             for (i in 0 until jsonArray.length()) {
                                 var `object` = jsonArray.getJSONObject(i)
-                                var balance = `object`.getString("balance").trim()
-                                var balanceint = Integer.parseInt(balance, 10)
-                                myBalance?.text = NumberFormat.getNumberInstance(Locale.US).format(balanceint)
-                                var referral = `object`.getString("referral").trim()
-                                var point = `object`.getString("point").trim()
-                                temporarySession!!.createSession(balanceint.toString(), referral , point)
+                                val no_hp = `object`.getString("no_hp").trim { it <= ' ' }
+                                val name = `object`.getString("name").trim { it <= ' ' }
+                                val photo = `object`.getString("photo").trim { it <= ' ' }
+                                val balance = `object`.getString("balance").trim { it <= ' ' }
+                                val referral = `object`.getString("referral").trim { it <= ' ' }
+                                val point = `object`.getString("point").trim { it <= ' ' }
+                                val sessionManager = SessionManager(activity)
+                                sessionManager.logout()
+                                sessionManager.createSession(email, password, no_hp, name, photo, balance, referral, point)
+                                txtUserName?.text = name
+                                txtUserEmail?.text = email
+                                txtBalance?.setText(NumberFormat.getNumberInstance(Locale.US).format(balance!!.toInt()))
                                 val shimmer = root.findViewById<ShimmerFrameLayout>(R.id.shimmer1)
                                 val userdetails = root.findViewById<RelativeLayout>(R.id.userDetailsHome)
                                 val spinKitView = root.findViewById<SpinKitView>(R.id.spin_kit)

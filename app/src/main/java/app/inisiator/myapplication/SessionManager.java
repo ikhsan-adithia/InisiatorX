@@ -20,6 +20,9 @@ public class SessionManager {
     static final String NO = "NO";
     static final String NAMA = "NAMA";
     static final String PHOTO = "PHOTO";
+    private static final String BALANCE = "BALANCE";
+    private static final String REFERRAl = "REFERRAl";
+    private static final String POINT = "POINT";
 
     @SuppressLint("CommitPrefEdits")
     public SessionManager(Context context){
@@ -28,13 +31,16 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
-    void createSession(String Email, String Password, String No, String Nama, String Photo){
+    void createSession(String Email, String Password, String No, String Nama, String Photo, String Balance, String Referral, String Point){
         editor.putBoolean(LOGIN, true);
         editor.putString("EMAIL", Email);
         editor.putString("PASSWORD", Password);
         editor.putString("NO",No);
         editor.putString("NAMA", Nama);
         editor.putString("PHOTO", Photo);
+        editor.putString("BALANCE", Balance);
+        editor.putString("REFERRAl", Referral);
+        editor.putString("POINT", Point);
         editor.apply();
     }
 
@@ -57,6 +63,9 @@ public class SessionManager {
         user.put(NO,sharedPreferences.getString(NO,null));
         user.put(NAMA, sharedPreferences.getString(NAMA, null));
         user.put(PHOTO, sharedPreferences.getString(PHOTO, null));
+        user.put(BALANCE, sharedPreferences.getString(BALANCE, null));
+        user.put(REFERRAl,sharedPreferences.getString(REFERRAl, null));
+        user.put(POINT, sharedPreferences.getString(POINT, null));
         return user;
     }
 
