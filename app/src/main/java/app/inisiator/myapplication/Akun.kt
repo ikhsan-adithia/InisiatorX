@@ -6,6 +6,7 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Handler
 import android.provider.MediaStore
 import android.util.Base64
 import android.view.LayoutInflater
@@ -13,28 +14,34 @@ import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.facebook.shimmer.ShimmerFrameLayout
+import com.github.ybq.android.spinkit.SpinKitView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONException
 import org.json.JSONObject
 import org.w3c.dom.Text
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import java.util.HashMap
+import java.text.NumberFormat
+import java.util.*
 
 class Akun : Fragment() {
-    var temporarySession: TemporarySession? = null
     var sessionManager: SessionManager? = null
     val URL_UPLOAD = "https://awalspace.com/app/imbalopunyajangandiganggu/upload.php"
+    private lateinit var swipeContainer: SwipeRefreshLayout
     private var txtnama: TextView? = null
     private var txtemail: TextView? = null
     private var txtnohp: TextView? = null
@@ -54,8 +61,6 @@ class Akun : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         root =  inflater.inflate(R.layout.fragment_akun, container, false)
-
-        temporarySession = TemporarySession(activity)
         sessionManager = SessionManager(activity)
         txtnama = root.findViewById(R.id.txtMyName)
         txtemail = root.findViewById(R.id.txtMyLevel)
@@ -66,6 +71,7 @@ class Akun : Fragment() {
         txtemailawal = root.findViewById(R.id.userEmail_HomeContent)
         val main = MainActivity()
         main.status(false, activity)
+        swipeContainer = root.findViewById(R.id.swipe_akun)
         val profilee = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
         val logout = root.findViewById<View>(R.id.logoutLayout)
         val changep = root.findViewById<View>(R.id.passwordLayout)
@@ -73,12 +79,19 @@ class Akun : Fragment() {
         val nama = user.get("NAMA")
         val email = user.get("EMAIL")
         val phone = user.get("NO")
+        val password = user.get("PASSWORD")
         val photo = user.get("PHOTO")
-        val user1: HashMap<String, String> = temporarySession!!.temporarySession
-        val balance = user1.get("BALANCE")
-        val referral = user1.get("REFERRAl")
-        val point = user1.get("POINT")
-        val position = user1.get("POSITION")
+        val balance = user.get("BALANCE")
+        val referral = user.get("REFERRAl")
+
+        swipeContainer.setOnRefreshListener {
+            takebalance(email!!, password!!)
+            Handler().postDelayed({
+                if (swipeContainer.isRefreshing) {
+                    swipeContainer.isRefreshing = false
+                }
+            }, 1000)
+        }
 
         changep.setOnClickListener{
             startActivity(Intent(activity, Change::class.java))
@@ -204,5 +217,101 @@ class Akun : Fragment() {
 
 
         return encodedImage
+    }
+
+
+    fun takebalance(email: String, password: String) {
+        val url = "https://awalspace.com/app/imbalopunyajangandiganggu/login.php"
+        val stringRequest = object : StringRequest(Request.Method.POST, url,
+                Response.Listener { response ->
+                    try {
+                        val jsonObject = JSONObject(response)
+                        val success = jsonObject.getString("success")
+                        val jsonArray = jsonObject.getJSONArray("login")
+
+                        if (success == "1") {
+                            for (i in 0 until jsonArray.length()) {
+                                var `object` = jsonArray.getJSONObject(i)
+                                val no_hp = `object`.getString("no_hp").trim { it <= ' ' }
+                                val name = `object`.getString("name").trim { it <= ' ' }
+                                val photo = `object`.getString("photo").trim { it <= ' ' }
+                                val balance = `object`.getString("balance").trim { it <= ' ' }
+                                val referral = `object`.getString("referral").trim { it <= ' ' }
+                                val point = `object`.getString("point").trim { it <= ' ' }
+                                val sessionManager = SessionManager(activity)
+                                sessionManager.logout()
+                                sessionManager.createSession(email, password, no_hp, name, photo, balance, referral, point)
+                                txtnama!!.text = name
+                                txtemail!!.text  = email
+                                txtnohp!!.text = no_hp
+                                txtbalance!!.text = balance
+                                txtemailawal!!.text = email
+                                txtnameawal!!.text = name
+                                txtreferral!!.text = referral
+                                if (photo.equals("")) {
+                                }
+                                else {
+                                    val profilee = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
+                                    Glide.with(activity!!).load(photo).into(profilee)}
+                            }
+
+                            val main = MainActivity()
+                            main.status(true, activity)
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        val bottomSheetDialog = BottomSheetDialog(
+                                activity!!, R.style.BottomSheetDialogTheme
+                        )
+                        val bottomSheetView = LayoutInflater.from(activity!!)
+                                .inflate(
+                                        R.layout.layout_bottom_notif,
+                                        null
+                                )
+                        bottomSheetView.findViewById<TextView>(R.id.title).setText("Terjadi Kesalahan!")
+                        bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, telah terjadi kesalahan pada sistem kami. Silahkan tunggu beberapa saat dan coba lagi.")
+                        bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                            bottomSheetDialog.cancel()
+                            onResume()
+                        }
+                        bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                            bottomSheetDialog.cancel()
+                            onResume()
+                        }
+                        bottomSheetDialog.setContentView(bottomSheetView)
+                        bottomSheetDialog.show()
+                    }
+                }, Response.ErrorListener { error ->
+            val bottomSheetDialog = BottomSheetDialog(
+                    activity!!, R.style.BottomSheetDialogTheme
+            )
+            val bottomSheetView = LayoutInflater.from(activity!!)
+                    .inflate(
+                            R.layout.layout_bottom_notif,
+                            null
+                    )
+            bottomSheetView.findViewById<TextView>(R.id.title).setText("Terjadi Kesalahan!")
+            bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, telah terjadi kesalahan pada sistem kami. Silahkan tunggu beberapa saat dan coba lagi.")
+            bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                bottomSheetDialog.cancel()
+                onResume()
+            }
+            bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                bottomSheetDialog.cancel()
+                onResume()
+            }
+            bottomSheetDialog.setContentView(bottomSheetView)
+            bottomSheetDialog.show()
+        }) {
+            @Throws(AuthFailureError::class)
+            override fun getParams(): Map<String, String> {
+                val params = java.util.HashMap<String, String>()
+                params["email"] = email
+                params["password"] = password
+                return params
+            }
+        }
+        val requestQueue = Volley.newRequestQueue(activity)
+        requestQueue.add(stringRequest)
     }
 }

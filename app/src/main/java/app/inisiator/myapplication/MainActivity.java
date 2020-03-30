@@ -129,8 +129,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        final TemporarySession temporarySession = new TemporarySession(this);
-        temporarySession.logout();
         final ArtikelSession artikelSession = new ArtikelSession(this);
         artikelSession.logout();
         final KegiatanSession kegiatanSession = new KegiatanSession(this);

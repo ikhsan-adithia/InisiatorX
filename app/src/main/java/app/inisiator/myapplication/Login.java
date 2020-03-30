@@ -110,13 +110,16 @@ public class Login extends AppCompatActivity {
                                     final String no_hp = object.getString("no_hp").trim();
                                     final String name = object.getString("name").trim();
                                     final String photo = object.getString("photo").trim();
+                                    final String balance = object.getString("balance").trim();
+                                    final String referral = object.getString("referral").trim();
+                                    final String point = object.getString("point").trim();
 
                                     final Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
                                         public void run() {
                                             spin_kit.setVisibility(View.GONE);
-                                            sessionManager.createSession(email, password, no_hp, name, photo );
+                                            sessionManager.createSession(email, password, no_hp, name, photo, balance, referral, point );
                                             Intent intent = new Intent(Login.this, Success.class);
                                             startActivity(intent);
                                         }
