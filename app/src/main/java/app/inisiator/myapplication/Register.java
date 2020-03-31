@@ -164,7 +164,7 @@ public class Register extends AppCompatActivity {
                                 handler.postDelayed(new Runnable() {
                                     @Override
                                     public void run() {
-                                        sessionManager.createSession(email, password, no, nama,"", "0", "", "0" );
+                                        sessionManager.createSession(email, password, no, nama,"", "0", "", "0" , "123456");
                                         spinKitView.setVisibility(View.GONE);
                                         Intent intent = new Intent(Register.this, Success.class);
                                         startActivity(intent);

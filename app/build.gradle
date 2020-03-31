@@ -49,9 +49,11 @@ dependencies {
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
     implementation 'net.gotev:uploadservice:2.1'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'com.github.GoodieBag:Pinview:v1.4'
 }
 repositories {
     mavenCentral()
     google()
     jcenter()
+    maven { url 'https://jitpack.io' }
 }

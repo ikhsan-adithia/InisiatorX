@@ -1,6 +1,7 @@
 package app.inisiator.myapplication
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.MediaStore
 import android.util.Base64
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import com.android.volley.AuthFailureError
@@ -16,6 +18,8 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.github.ybq.android.spinkit.SpinKitView
+import com.goodiebag.pinview.Pinview
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.activity_pin.*
 import org.json.JSONArray
@@ -693,10 +697,6 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 if (textView11.text.equals("0")) {
                     Toast.makeText(this, "Minimal Pemesanan adalah 1 buah", Toast.LENGTH_SHORT).show()
                 } else {
-                    val main = findViewById<ScrollView>(R.id.main)
-                    val spin_kit = findViewById<SpinKitView>(R.id.spin_kit)
-                    main.visibility = View.INVISIBLE
-                    spin_kit.visibility = View.VISIBLE
                     var sessionManager = SessionManager(this)
                     var user: HashMap<String, String> = sessionManager.userDetail
                     var emaill = user.get("EMAIL")
@@ -706,7 +706,7 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                     var jumlah = titJumlah.text.toString()
                     var merchant = spinner3.selectedItem.toString()
                     var kodes = kode.text.toString()
-                    UploadPicture(emaill!!, bitmap?.let { getStringImage(it) }!!, harga, ukuran, laminasi, jumlah, merchant, kodes)
+                    checkpin(emaill!!, bitmap?.let { getStringImage(it) }!!, harga, ukuran, laminasi, jumlah, merchant, kodes)
                 }
             }
         }
@@ -938,5 +938,69 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val spin_kit = findViewById<SpinKitView>(R.id.spin_kit)
         main.visibility = View.INVISIBLE
         spin_kit.visibility = View.VISIBLE
+    }
+
+    private fun checkpin(email: String, photo: String, harga: String, ukuran: String, laminasi: String, jumlah: String, merchant: String, kode: String) {
+        val view = layoutInflater.inflate(R.layout.pin, null);
+        val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        dialog.setContentView(view)
+        val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+            val intPIN = pinView.value
+            val sessionManager = SessionManager(this)
+            val user = sessionManager.userDetail
+            val pin = user["PIN"]
+            if (pin == "123456") {
+                val bottomSheetDialog = BottomSheetDialog(
+                        this, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Masih Default!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN anda masih dalam keadaan default dari sistem, silahkan ganti PIN anda pada menu AKUN.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            } else if (pin == intPIN) {
+                val main = findViewById<ScrollView>(R.id.main)
+                val spin_kit = findViewById<SpinKitView>(R.id.spin_kit)
+                dialog.cancel()
+                main.visibility = View.INVISIBLE
+                spin_kit.visibility = View.VISIBLE
+                UploadPicture(email, photo, harga, ukuran, laminasi, jumlah, merchant, kode)
+            } else if (pin != intPIN) {
+                val bottomSheetDialog = BottomSheetDialog(
+                        this, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Salah!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN yang anda masukkan salah. Silahkan coba lagi.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            }
+        })
+        dialog.show()
     }
 }

@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.CodeScannerView
 import com.budiyev.android.codescanner.DecodeCallback
+import com.goodiebag.pinview.Pinview
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -154,7 +155,10 @@ class Scanner2 : AppCompatActivity() {
                                         bottomSheetDialog.setContentView(bottomSheetView)
                                         bottomSheetDialog.show()
                                     }
-                                    else{topup(no_!!, id_merchant, nominal.text.toString())}
+                                    else{
+                                        checkpin(no_!!, id_merchant, nominal.text.toString())
+//                                        topup(no_!!, id_merchant, nominal.text.toString())
+                                    }
                                 }
                                 dialog.show()
 
@@ -237,6 +241,64 @@ class Scanner2 : AppCompatActivity() {
         requestQueue.add(stringRequest)
     }
 
+    private fun checkpin(no: String, merchant_id: String, nominal: String) {
+        val view = layoutInflater.inflate(R.layout.pin, null);
+        val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        dialog.setContentView(view)
+        val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+            val intPIN = pinView.value
+            val sessionManager = SessionManager(applicationContext)
+            val user = sessionManager.userDetail
+            val pin = user["PIN"]
+            if (pin == "123456") {
+                val bottomSheetDialog = BottomSheetDialog(
+                        this, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Masih Default!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN anda masih dalam keadaan default dari sistem, silahkan ganti PIN anda pada menu AKUN.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            } else if (pin == intPIN) {
+                topup(no, merchant_id, nominal)
+            } else if (pin != intPIN) {
+                val bottomSheetDialog = BottomSheetDialog(
+                        this, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Salah!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN yang anda masukkan salah. Silahkan coba lagi.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            }
+        })
+        dialog.show()
+    }
 
     private fun topup(no: String, merchant_id: String, nominal: String) {
         val stringRequest = object : StringRequest(Request.Method.POST, URL_TOPUP,

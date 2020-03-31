@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.github.ybq.android.spinkit.SpinKitView
+import com.goodiebag.pinview.Pinview
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONException
@@ -59,7 +60,7 @@ class Beranda : Fragment() {
         val balance = user.get("BALANCE")
         val referral = user.get("REFERRAL")
         val point = user.get("POINT")
-        sessionManager = SessionManager(activity)
+        val pin = user.get("PIN")
         swipeContainer = root.findViewById(R.id.swipe_home)
         val main = MainActivity()
         main.status(false, activity)
@@ -205,9 +206,10 @@ class Beranda : Fragment() {
                                 val balance = `object`.getString("balance").trim { it <= ' ' }
                                 val referral = `object`.getString("referral").trim { it <= ' ' }
                                 val point = `object`.getString("point").trim { it <= ' ' }
+                                val pin = `object`.getString("PIN").trim{ it <= ' '}
                                 val sessionManager = SessionManager(activity)
                                 sessionManager.logout()
-                                sessionManager.createSession(email, password, no_hp, name, photo, balance, referral, point)
+                                sessionManager.createSession(email, password, no_hp, name, photo, balance, referral, point, pin)
                                 txtUserName?.text = name
                                 txtUserEmail?.text = email
                                 txtBalance?.setText(NumberFormat.getNumberInstance(Locale.US).format(balance!!.toInt()))
@@ -281,7 +283,6 @@ class Beranda : Fragment() {
         val requestQueue = Volley.newRequestQueue(activity)
         requestQueue.add(stringRequest)
     }
-
 
     private fun find(no_hp: String) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, this.URL_FIND,
@@ -399,7 +400,8 @@ class Beranda : Fragment() {
                                         bottomSheetDialog.show()
                                     }
                                     else{
-                                        Request(nominal.text.toString(), no_.toString(), no_hp )
+                                        checkpin(nominal.text.toString(), no_.toString(), no_hp)
+//                                        Request(nominal.text.toString(), no_.toString(), no_hp )
                                     }
                                 }
                                 dialog.show()
@@ -484,7 +486,6 @@ class Beranda : Fragment() {
         requestQueue.add(stringRequest)
     }
 
-
     private fun Request(nominall: String, no_: String, no_tujuan :String) {
         val stringRequest: StringRequest = object : StringRequest(Method.POST, this.URL_REQUEST,
                 Response.Listener { response ->
@@ -515,6 +516,64 @@ class Beranda : Fragment() {
         requestQueue.add(stringRequest)
     }
 
+    private fun checkpin(nominall: String, no_: String, no_tujuan :String) {
+        val view = layoutInflater.inflate(R.layout.pin, null);
+        val dialog = Dialog(activity!!, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        dialog.setContentView(view)
+        val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+            val intPIN = pinView.value
+            val sessionManager = SessionManager(activity)
+            val user = sessionManager.userDetail
+            val pin = user["PIN"]
+            if (pin == "123456") {
+                val bottomSheetDialog = BottomSheetDialog(
+                        activity!!, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(activity!!)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Masih Default!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN anda masih dalam keadaan default dari sistem, silahkan ganti PIN anda pada menu AKUN.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            } else if (pin == intPIN) {
+                Request(nominall, no_, no_tujuan )
+            } else if (pin != intPIN) {
+                val bottomSheetDialog = BottomSheetDialog(
+                        activity!!, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(activity!!)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Salah!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN yang anda masukkan salah. Silahkan coba lagi.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            }
+        })
+        dialog.show()
+    }
 
     fun type(no: String) {
         val url = "https://awalspace.com/app/imbalopunyajangandiganggu/checktype.php"

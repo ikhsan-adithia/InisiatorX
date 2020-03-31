@@ -75,6 +75,7 @@ class Akun : Fragment() {
         val profilee = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
         val logout = root.findViewById<View>(R.id.logoutLayout)
         val changep = root.findViewById<View>(R.id.passwordLayout)
+        val changepin = root.findViewById<View>(R.id.pinlayout)
         val user: HashMap<String, String> = sessionManager!!.userDetail
         val nama = user.get("NAMA")
         val email = user.get("EMAIL")
@@ -95,6 +96,10 @@ class Akun : Fragment() {
 
         changep.setOnClickListener{
             startActivity(Intent(activity, Change::class.java))
+        }
+
+        changepin.setOnClickListener{
+            startActivity(Intent(activity, Changepin::class.java))
         }
 
         profilee.setOnClickListener {chooseFile()}
@@ -219,7 +224,6 @@ class Akun : Fragment() {
         return encodedImage
     }
 
-
     fun takebalance(email: String, password: String) {
         val url = "https://awalspace.com/app/imbalopunyajangandiganggu/login.php"
         val stringRequest = object : StringRequest(Request.Method.POST, url,
@@ -238,9 +242,10 @@ class Akun : Fragment() {
                                 val balance = `object`.getString("balance").trim { it <= ' ' }
                                 val referral = `object`.getString("referral").trim { it <= ' ' }
                                 val point = `object`.getString("point").trim { it <= ' ' }
+                                val pin = `object`.getString("PIN").trim { it <= ' '}
                                 val sessionManager = SessionManager(activity)
                                 sessionManager.logout()
-                                sessionManager.createSession(email, password, no_hp, name, photo, balance, referral, point)
+                                sessionManager.createSession(email, password, no_hp, name, photo, balance, referral, point, pin)
                                 txtnama!!.text = name
                                 txtemail!!.text  = email
                                 txtnohp!!.text = no_hp

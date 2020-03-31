@@ -2,6 +2,7 @@ package app.inisiator.myapplication
 
 import android.Manifest
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -20,6 +21,7 @@ import com.android.volley.toolbox.Volley
 import com.github.barteksc.pdfviewer.PDFView
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.ybq.android.spinkit.SpinKitView
+import com.goodiebag.pinview.Pinview
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_print.*
 import net.gotev.uploadservice.MultipartUploadRequest
@@ -116,11 +118,7 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
                 if (textView11.text.equals("0")) {
                     Toast.makeText(this, "Minimal Pemesanan adalah 1 buah", Toast.LENGTH_SHORT).show()
                 } else {
-                    val main = findViewById<ScrollView>(R.id.main)
-                    val spin_kit = findViewById<SpinKitView>(R.id.spin_kit)
-                    main.visibility = View.INVISIBLE
-                    spin_kit.visibility = View.VISIBLE
-                    uploadMultipart()
+                    checkpin()
                 }
             }
         }
@@ -139,8 +137,6 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
         }
     }
 
-
-
     override fun onNothingSelected(p0: AdapterView<*>?) {
 
     }
@@ -154,6 +150,7 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
     }
 
     private val uploadReceiver = SingleUploadBroadcastReceiver()
+
     override fun onResume() {
         super.onResume()
         uploadReceiver.register(this)
@@ -163,7 +160,6 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
         super.onPause()
         uploadReceiver.unregister(this)
     }
-
 
     private fun checkkode(kode: String, totall: Int) {
         val stringRequest = object : StringRequest(Request.Method.POST, URL_KODE2,
@@ -400,7 +396,6 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
 
     }
 
-
     fun AllowRunTimePermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
             Toast.makeText(this, "READ_EXTERNAL_STORAGE permission Access Dialog", Toast.LENGTH_LONG).show()
@@ -491,5 +486,69 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
             }, 3000)
 
         }
+    }
+
+    private fun checkpin() {
+        val view = layoutInflater.inflate(R.layout.pin, null);
+        val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        dialog.setContentView(view)
+        val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+            val intPIN = pinView.value
+            val sessionManager = SessionManager(this)
+            val user = sessionManager.userDetail
+            val pin = user["PIN"]
+            if (pin == "123456") {
+                val bottomSheetDialog = BottomSheetDialog(
+                        this, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Masih Default!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN anda masih dalam keadaan default dari sistem, silahkan ganti PIN anda pada menu AKUN.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            } else if (pin == intPIN) {
+                val main = findViewById<ScrollView>(R.id.main)
+                val spin_kit = findViewById<SpinKitView>(R.id.spin_kit)
+                dialog.cancel()
+                main.visibility = View.INVISIBLE
+                spin_kit.visibility = View.VISIBLE
+                uploadMultipart()
+            } else if (pin != intPIN) {
+                val bottomSheetDialog = BottomSheetDialog(
+                        this, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Salah!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN yang anda masukkan salah. Silahkan coba lagi.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            }
+        })
+        dialog.show()
     }
 }

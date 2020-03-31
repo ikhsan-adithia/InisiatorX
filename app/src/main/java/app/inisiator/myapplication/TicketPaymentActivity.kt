@@ -1,5 +1,6 @@
 package app.inisiator.myapplication
 
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -8,9 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
 import android.widget.ScrollView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import app.inisiator.myapplication.R
@@ -21,6 +24,8 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.github.ybq.android.spinkit.SpinKitView
+import com.goodiebag.pinview.Pinview
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -95,31 +100,9 @@ class TicketPaymentActivity : AppCompatActivity() {
                     .map(charPool::get)
                     .joinToString("")
 
-                ticketpayment_spin_kit.visibility = View.VISIBLE
-                ticketPaymentLayout.visibility = View.GONE
-
                 try {
-                    bitmap = textToImageEncode(filenameQr)
-                    val path = saveImage(bitmap, filenameQr)
-
-                    val intent = Intent(this, QrTicketPreviewActivity::class.java)
-                    intent.putExtra("QR_URI", path)
-                    intent.putExtra("EVENT_TITLE", eventTitle)
-                    intent.putExtra("EVENT_LOKASI", eventLokasi)
-                    intent.putExtra("EVENT_TANGGAL", eventTanggal)
-                    intent.putExtra("EVENT_WAKTU", eventWaktu)
-                    startActivity(intent)
-                    finish()
-
-                    uploadValidTicketToDatabase(
-                        filenameQr,
-                        eventTanggal,
-                        eventTitle,
-                        eventLokasi,
-                        eventWaktu,
-                        email,
-                            Integer.parseInt(my_balance_aftertransaction_tiket.text.toString())
-                    )
+                    checkpin(filenameQr, eventTanggal, eventTitle, eventLokasi, eventWaktu, email, Integer.parseInt(my_balance_aftertransaction_tiket.text.toString()))
+//                    uploadValidTicketToDatabase(filenameQr, eventTanggal, eventTitle, eventLokasi, eventWaktu, email, Integer.parseInt(my_balance_aftertransaction_tiket.text.toString()))
 
 //                    showToast("QRCode saved to -> $path")
 //                    Log.d("TicketPayment Dir", path)
@@ -131,15 +114,7 @@ class TicketPaymentActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadValidTicketToDatabase(
-        filenameQr: String,
-        eventTanggal: String?,
-        eventTitle: String?,
-        eventLokasi: String?,
-        eventWaktu: String?,
-        email: String?,
-        myBalanceAfterTransaction: Int
-    ) {
+    private fun uploadValidTicketToDatabase(filenameQr: String, eventTanggal: String?, eventTitle: String?, eventLokasi: String?, eventWaktu: String?, email: String?, myBalanceAfterTransaction: Int) {
         val url = "https://awalspace.com/app/imbalopunyajangandiganggu/insertValidQr.php"
         val stringRequest = object : StringRequest(Method.POST, url,
             Response.Listener {
@@ -147,7 +122,20 @@ class TicketPaymentActivity : AppCompatActivity() {
                     val jsonObject = JSONObject(it)
                     val success = jsonObject.getString("success")
                     if (success == "1") {
-                        Log.d("TicketPayment", "Data Uploaded")
+                        val main = findViewById<ScrollView>(R.id.main)
+                        val spinkit = findViewById<SpinKitView>(R.id.spin_kit)
+                        main.visibility = View.INVISIBLE
+                        spinkit.visibility = View.VISIBLE
+                        bitmap = textToImageEncode(filenameQr)
+                        val path = saveImage(bitmap, filenameQr)
+                        val intent = Intent(this, QrTicketPreviewActivity::class.java)
+                        intent.putExtra("QR_URI", path)
+                        intent.putExtra("EVENT_TITLE", eventTitle)
+                        intent.putExtra("EVENT_LOKASI", eventLokasi)
+                        intent.putExtra("EVENT_TANGGAL", eventTanggal)
+                        intent.putExtra("EVENT_WAKTU", eventWaktu)
+                        startActivity(intent)
+                        finish()
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
@@ -241,15 +229,7 @@ class TicketPaymentActivity : AppCompatActivity() {
         return bitmap
     }
 
-    private fun init(
-        eventTitle: String?,
-        eventLokasi: String?,
-        eventTanggal: String?,
-        eventWaktu: String?,
-        eventHarga: Int,
-        myBalance: Int,
-        myBalanceAfterTransaction: Int
-    ) {
+    private fun init(eventTitle: String?, eventLokasi: String?, eventTanggal: String?, eventWaktu: String?, eventHarga: Int, myBalance: Int, myBalanceAfterTransaction: Int) {
         ticketpayment_spin_kit.visibility = View.GONE
         ticketPaymentLayout.visibility = View.VISIBLE
 
@@ -351,6 +331,69 @@ class TicketPaymentActivity : AppCompatActivity() {
             main.visibility = View.VISIBLE
             spin_kit.visibility = View.INVISIBLE
         }, 1000)
+    }
+
+    private fun checkpin(filenameQr: String, eventTanggal: String?, eventTitle: String?, eventLokasi: String?, eventWaktu: String?, email: String?, myBalanceAfterTransaction: Int) {
+        val view = layoutInflater.inflate(R.layout.pin, null);
+        val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        dialog.setContentView(view)
+        val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+            val intPIN = pinView.value
+            val sessionManager = SessionManager(applicationContext)
+            val user = sessionManager.userDetail
+            val pin = user["PIN"]
+            if (pin == "123456") {
+                val bottomSheetDialog = BottomSheetDialog(
+                        this, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Masih Default!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN anda masih dalam keadaan default dari sistem, silahkan ganti PIN anda pada menu AKUN.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            } else if (pin == intPIN) {
+                val main = findViewById<ScrollView>(R.id.main)
+                val spinkit = findViewById<SpinKitView>(R.id.spin_kit)
+                main.visibility = View.INVISIBLE
+                spinkit.visibility = View.VISIBLE
+                uploadValidTicketToDatabase(filenameQr, eventTanggal, eventTitle, eventLokasi, eventWaktu, email, myBalanceAfterTransaction)
+            } else if (pin != intPIN) {
+                val bottomSheetDialog = BottomSheetDialog(
+                        this, R.style.BottomSheetDialogTheme
+                )
+                val bottomSheetView = LayoutInflater.from(this)
+                        .inflate(
+                                R.layout.layout_bottom_notif,
+                                null
+                        )
+                bottomSheetView.findViewById<TextView>(R.id.title).setText("PIN Salah!")
+                bottomSheetView.findViewById<TextView>(R.id.subtitle).setText("Maaf, PIN yang anda masukkan salah. Silahkan coba lagi.")
+                bottomSheetView.findViewById<View>(R.id.close).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetView.findViewById<View>(R.id.close2).setOnClickListener {
+                    bottomSheetDialog.cancel()
+                    onResume()
+                }
+                bottomSheetDialog.setContentView(bottomSheetView)
+                bottomSheetDialog.show()
+            }
+        })
+        dialog.show()
     }
 
 }
