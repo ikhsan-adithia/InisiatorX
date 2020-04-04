@@ -1,93 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Eshopping">
+    tools:context=".Eshopping"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/colorPrimary"
-        android:text="   Eshopping InisiatorX"
-        android:fontFamily="@font/sf_pro_display_bold"
-        android:textColor="#ffffff"
-        android:gravity="center|left"
-        android:textSize="20dp"/>
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/subtitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/title"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_corner_5dp">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/sf_pro_display_medium"
-            android:textSize="20dp"
-            android:padding="10dp"
-            android:textColor="#000000"
-            android:text="Perhatian!"/>
+            android:orientation="vertical" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/sf_pro_display_regular"
+                android:text="Menu belanja"
+                android:textColor="@color/colorPrimary"
+                android:textSize="34sp"
+                android:layout_marginTop="63dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:fontFamily="@font/sf_pro_display_regular"
-            android:textSize="13dp"
-            android:padding="10dp"
-            android:text="Ini merupakan fitur untuk seluruh user InisiatorX melakukan pembelanjaan online, dengan cara menukarkan coinX dengan merchandise yang menarik di bawah ini."/>
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="31dp">
 
+                <LinearLayout
+                    android:id="@+id/ganci"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#E8E8E8"
+                    android:layout_marginRight="6dp"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_corner_5dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/subtitle"
-        android:orientation="vertical"
-        android:layout_marginTop="50dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@drawable/ic_key_chain"/>
 
-        <Button
-            android:id="@+id/btntopin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_below="@+id/title"
-            android:background="@drawable/rounded_corner_5dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="Belanja Pin Online"
-            android:textSize="15dp"
-            android:textColor="#ffffff"
-            android:textStyle="bold"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:textSize="14sp"
+                        android:textColor="#000000"
+                        android:text="Gantungan Kunci"/>
 
-        <Button
-            android:id="@+id/btntoganci"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:layout_below="@+id/title"
-            android:background="@drawable/rounded_corner_5dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:text="Belanja Ganci Online"
-            android:textSize="15dp"
-            android:textColor="#ffffff"
-            android:textStyle="bold"/>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:textSize="11sp"
+                        android:textColor="#000000"
+                        android:text="Order gantungan kunci online"/>
 
+                </LinearLayout>
 
-    </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/pin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#E8E8E8"
+                    android:layout_marginLeft="6dp"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_corner_5dp">
 
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@drawable/ic_brands_and_logotypes"/>
 
-</RelativeLayout>
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:textSize="14sp"
+                        android:textColor="#000000"
+                        android:text="Lencana / Pin"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:textSize="11sp"
+                        android:textColor="#000000"
+                        android:text="Order lencana / pin Online"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:id="@+id/vegetable"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#E8E8E8"
+                    android:layout_marginRight="6dp"
+                    android:layout_height="200dp"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_corner_5dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="140dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:src="@drawable/ic_food"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_bold"
+                        android:textSize="14sp"
+                        android:textColor="#000000"
+                        android:text="Sayuran dan Buah"/>
+
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:textSize="11sp"
+                        android:textColor="#000000"
+                        android:text="Order sayuran dan buah online"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

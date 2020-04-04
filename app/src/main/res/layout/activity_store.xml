@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Store">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="30dp"
+                android:layout_above="@+id/menu">
+
+                    <RelativeLayout
+                        android:id="@+id/shimmer"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmer2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                app:cardBackgroundColor="#EEEEEE"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_marginTop="230dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                app:cardBackgroundColor="#EEEEEE"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_marginTop="450dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                app:cardBackgroundColor="#EEEEEE"/>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_marginTop="670dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                app:cardBackgroundColor="#EEEEEE"/>
+
+                        </com.facebook.shimmer.ShimmerFrameLayout>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/main"
+                        android:visibility="visible"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Orderan Saya"
+                            android:textColor="#000000"
+                            android:fontFamily="@font/nunito_sans_regular"
+                            android:textSize="25dp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_marginTop="20dp"
+                            android:id="@+id/recyclerview_store"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                    </LinearLayout>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="50dp"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/separator1"
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_below="@+id/lokasi_eventdetail"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="Total"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="left|center"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:textColor="#000000"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:text="C 200"
+                    android:gravity="right"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="25dp"/>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/separator2"
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_below="@+id/lokasi_eventdetail"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@android:color/darker_gray" />
+
+            <Button
+                android:id="@+id/checkout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="40dp"
+                android:text="Lihat Keranjang"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:backgroundTint="#ffd662"
+                android:background="@drawable/rounded_corner_5dp" />
+
+        </LinearLayout>
+
+</RelativeLayout>

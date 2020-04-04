@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 
 class Eshopping : AppCompatActivity() {
 
@@ -11,14 +12,19 @@ class Eshopping : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eshopping)
 
-        val pin = findViewById<Button>(R.id.btntopin)
+        val pin = findViewById<LinearLayout>(R.id.pin)
         pin.setOnClickListener {
             startActivity(Intent(this, Pin::class.java))
         }
 
-        val ganci = findViewById<Button>(R.id.btntoganci)
+        val ganci = findViewById<LinearLayout>(R.id.ganci)
         ganci.setOnClickListener {
             startActivity(Intent(this, Ganci::class.java))
+        }
+
+        val vegetable = findViewById<LinearLayout>(R.id.vegetable)
+        vegetable.setOnClickListener {
+            startActivity(Intent(this, Store::class.java))
         }
     }
 }
