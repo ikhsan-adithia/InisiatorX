@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailKompetisi">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_komp_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="@drawable/bg_event"/>
+
+                <RelativeLayout
+                    android:id="@+id/top"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:background="#95000000"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/nama_komp_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/close"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/sf_pro_display_regular"
+                        android:text="The InisiatorX"
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/penyelenggara_komp_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/nama_komp_detail"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginRight="20dp"
+                        android:fontFamily="@font/nunito_sans_regular"
+                        android:text="Event Terbuka, InisiatorX"
+                        android:textColor="#ffffff"
+                        android:textSize="15dp" />
+
+                    <TextView
+                        android:id="@+id/jenis_komp_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:text="Rp. 50.000"
+                        android:textSize="30sp"
+                        android:fontFamily="@font/sf_pro_display_bold"
+                        android:textColor="#ffffff"
+                        android:gravity="right"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="10dp"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/satu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/top"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Alamat Kompetisi"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/lokasi_komp_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/satu"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="lokasi_komp_detail" />
+
+                <View
+                    android:id="@+id/separator1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.6dp"
+                    android:layout_below="@+id/lokasi_komp_detail"
+                    android:layout_marginTop="20dp"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:id="@+id/linear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/separator1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:layout_weight="0.999"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:text="Batas Waktu Pendaftaran"
+                            android:textColor="#000000"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/bataswaktu_komp_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="20dp"
+                            android:text="bataswaktu_komp_detail" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/separator3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.6dp"
+                    android:layout_below="@+id/linear"
+                    android:background="@android:color/darker_gray" />
+
+                <TextView
+                    android:id="@+id/ket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/separator3"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="Keterangan Kompetisi"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/keterangan_komp_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ket"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:text="Untuk pemesanan tiket event online anda bisa melakukannya dengan cara menekan tombol
+yang ada di bawah ini, jika anda belum melengkapi biodata anda akan diarahkan untuk mengisi biodata terlebih dahulu.\n\nTetapi jika anda sudah mengisi biodata maka anda langsung diarahkan dalam halaman pembelian tiket online event tersebut." />
+
+                <Button
+                    android:id="@+id/submit_register_komp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@+id/keterangan_komp_detail"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/rounded_corner_5dp"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:text="Konfimasi"
+                    android:textAllCaps="false"
+                    android:textColor="#ffffff"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
