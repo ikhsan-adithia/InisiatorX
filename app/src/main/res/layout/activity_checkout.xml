@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".checkoutnow">
+
+    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/spin_checkout"
+        android:visibility="invisible"
+        style="@style/SpinKitView.ThreeBounce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        app:SpinKit_Color="@color/colorPrimary" />
+
+    <ScrollView
+        android:id="@+id/main"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Keranjang Anda"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:fontFamily="@font/sf_pro_display_bold"
+                android:textSize="25sp"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:weightSum="2"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Nama\nProduk yang dibeli"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Jumlah\n(Kg/Pack/Bungkus/Ikat)"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/checkout_re"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Detail Pembelian :"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                app:boxStrokeColor="#D23E3F"
+                android:layout_marginTop="20dp"
+                android:layout_alignTop="@+id/textView24"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#CDD2D6"
+                    android:hint="Nama pembeli"
+                    android:inputType="textPersonName"
+                    android:textColor="#000000"
+                    android:textColorHint="#CDD2D6"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                app:boxStrokeColor="#D23E3F"
+                android:layout_alignTop="@+id/textView24"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#CDD2D6"
+                    android:hint="Alamat tujuan"
+                    android:inputType="textPersonName"
+                    android:textColor="#000000"
+                    android:textColorHint="#CDD2D6"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNo"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                app:boxStrokeColor="#D23E3F"
+                android:layout_alignTop="@+id/textView24"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/titNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#CDD2D6"
+                    android:hint="Nomor yang bisa dihubungi"
+                    android:inputType="number"
+                    android:textColor="#000000"
+                    android:textColorHint="#CDD2D6"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilkode"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="75dp"
+                    app:boxStrokeColor="#D23E3F"
+                    android:layout_alignTop="@+id/textView24"
+                    android:layout_marginLeft="20dp"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/titkode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#CDD2D6"
+                        android:hint="Kode promo"
+                        android:inputType="text"
+                        android:textColor="#000000"
+                        android:textColorHint="#CDD2D6"
+                        android:textSize="14sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:layout_weight="0.5"
+                    android:id="@+id/check"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="15sp"
+                    android:text="Check"
+                    android:layout_marginRight="20dp"
+                    android:backgroundTint="#ffd662"
+                    android:background="@drawable/rounded_corner_5dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total :"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:gravity="right"
+                    />
+
+                <TextView
+                    android:id="@+id/total"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0 C"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:gravity="right"
+                    />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ongkos Kirim :"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:gravity="right"
+                    />
+
+                <TextView
+                    android:id="@+id/ongkir"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="30 C"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:gravity="right"
+                    />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_marginTop="10dp"
+                android:id="@+id/separator1"
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_below="@+id/lokasi_komp_detail"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Total Bayar :"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:gravity="right"
+                    />
+
+                <TextView
+                    android:id="@+id/total_bayar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="0 C"
+                    android:textColor="#000000"
+                    android:fontFamily="@font/nunito_sans_bold"
+                    android:gravity="right"
+                    />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Bayar Sekarang"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:backgroundTint="#ffd662"
+                android:background="@drawable/rounded_corner_5dp" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

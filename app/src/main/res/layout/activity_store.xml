@@ -16,7 +16,7 @@
 
                     <RelativeLayout
                         android:id="@+id/shimmer"
-                        android:visibility="gone"
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
@@ -55,7 +55,7 @@
 
                     <LinearLayout
                         android:id="@+id/main"
-                        android:visibility="visible"
+                        android:visibility="gone"
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
@@ -85,63 +85,12 @@
 
         <LinearLayout
             android:id="@+id/menu"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="30dp"
             android:orientation="vertical">
-
-            <View
-                android:id="@+id/separator1"
-                android:layout_width="match_parent"
-                android:layout_height="0.6dp"
-                android:layout_below="@+id/lokasi_eventdetail"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@android:color/darker_gray" />
-
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
-                android:weightSum="2">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="Total"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="left|center"
-                    android:fontFamily="@font/nunito_sans_bold"
-                    android:textColor="#000000"
-                    android:textSize="20dp"/>
-
-                <TextView
-                    android:id="@+id/total"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="C 200"
-                    android:gravity="right"
-                    android:fontFamily="@font/nunito_sans_bold"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="25dp"/>
-
-            </LinearLayout>
-
-            <View
-                android:id="@+id/separator2"
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="0.6dp"
-                android:layout_below="@+id/lokasi_eventdetail"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:background="@android:color/darker_gray" />
 
             <Button
                 android:id="@+id/checkout"
@@ -149,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="10dp"
                 android:text="Lihat Keranjang"
                 android:textColor="#000000"
                 android:textSize="15sp"
