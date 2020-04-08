@@ -5,19 +5,12 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
-import app.inisiator.myapplication.models.QrNotif
-import app.inisiator.myapplication.tab_notifikasi.NotifItem
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_detail_kompetisi.*
-import kotlinx.android.synthetic.main.fragment_notifikasi_tab.*
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -33,50 +26,73 @@ class DetailKompetisi : AppCompatActivity() {
         val userPass = currentUser["PASSWORD"]
 
         val namaKompetisi = intent.getStringExtra("NAMA_KOMP")
+        val jenisKompetisi = intent.getStringExtra("JENIS_KOMP")
 
         init()
 
         submit_register_komp.setOnClickListener {
-            checkForRegistrant(userEmail, userPass, namaKompetisi)
-//            checkForBio(userEmail, userPass)
+            checkForRegistrant(userEmail, userPass, namaKompetisi, jenisKompetisi)
         }
     }
 
-    private fun checkForRegistrant(userEmail: String?, userPass: String?, namaKompetisi: String?) {
+    private fun checkForRegistrant(userEmail: String?, userPass: String?, namaKompetisi: String?, jenisKompetisi: String?) {
         Log.d("DetailKomp", "Konfirmasi")
         val url = "https://awalspace.com/app/imbalopunyajangandiganggu/checkForRegistrant.php"
-        val strRequest = object : StringRequest(Method.POST, url,
+        val strReq = object : StringRequest(Method.POST, url,
                 Response.Listener { response ->
                     try {
-                        val array = JSONArray(response)
+                        val jsonObject = JSONObject(response)
+                        val status = jsonObject.getString("success")
+                        val jsonArray = jsonObject.getJSONArray("profile")
 
-                        for (i in 0 until array.length()) {
-                            val obj = array.getJSONObject(i)
-                            val email = obj.getString("email")
-                            val namaKomp = obj.getString("nama_komp")
-                            Log.d("DetailKomp", "Konfirmasi2")
-                            if (email != userEmail && namaKomp != namaKompetisi ) {
-                                checkForBio(userEmail, userPass)
+                        if (status == "1") {
+                            Log.d("DetailKomp", "1")
+                            for (i in 0 until jsonArray.length()) {
+                                val obj = jsonArray.getJSONObject(i)
+                                val email = obj.getString("email")
+                                val namaKomp = obj.getString("nama_komp")
+
+                                Log.d("DetailKomp", "check registrant")
+
+                                if (email != userEmail && namaKomp != namaKompetisi) {
+                                    Log.d("DetailKomp", "Check bio")
+                                    checkForBio(userEmail, userPass, jenisKompetisi)
+                                } else {
+                                    Log.d("DetailKomp", "Sudah register")
+                                    Toast.makeText(this, "Sudah Registrasi", Toast.LENGTH_SHORT).show()
+                                }
                             }
+                        } else if (status == "0") {
+                            Log.d("DetailKomp", "0")
+                            checkForBio(userEmail, userPass, jenisKompetisi)
                         }
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
+
                 }, Response.ErrorListener {
-            it.printStackTrace()
+            Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
         }) {
+
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
-                return java.util.HashMap()
+                val params = HashMap<String, String>()
+                params["email"] = userEmail!!
+                return params
             }
         }
 
         val requestQueue = Volley.newRequestQueue(this)
-        requestQueue.add(strRequest)
+        requestQueue.add(strReq)
     }
 
-    private fun checkForBio(userEmail: String?, userPass: String?) {
+    private fun checkForBio(userEmail: String?, userPass: String?, jenisKompetisi: String?) {
         Log.d("DetailKomp", "Check bio")
+//        var harga: Int= 0
+//        if (jenisKompetisi != "gratis") {
+//            harga = jenisKompetisi!!.toInt()
+//        }
+
         val url = "https://awalspace.com/app/imbalopunyajangandiganggu/profile.php"
         val strReq = object : StringRequest(Method.POST, url,
                 Response.Listener { response ->
@@ -96,10 +112,19 @@ class DetailKompetisi : AppCompatActivity() {
                                     val intent = Intent(this, CompleteBioActivity::class.java)
                                     startActivity(intent)
                                 } else {
-                                    val intent = Intent(this, InsertFileKompetisi::class.java)
-                                    startActivity(intent)
-                                    finish()
-                                    Log.d("DetailKomp", "silahkan insert file")
+                                    if (jenisKompetisi != "gratis") {
+                                        val harga: Int = jenisKompetisi!!.toInt()
+                                        if (balance.toInt() < harga) {
+                                            Toast.makeText(this, "CoinX anda tidak cukup", Toast.LENGTH_SHORT).show()
+                                        }
+                                    } else {
+                                        val namaKompetisi = intent.getStringExtra("NAMA_KOMP")
+                                        val intent = Intent(this, InsertFileKompetisi::class.java)
+                                        intent.putExtra("NAMA_KOMP", namaKompetisi)
+                                        startActivity(intent)
+                                        finish()
+                                        Log.d("DetailKomp", "silahkan insert file")
+                                    }
                                 }
                             }
                         }

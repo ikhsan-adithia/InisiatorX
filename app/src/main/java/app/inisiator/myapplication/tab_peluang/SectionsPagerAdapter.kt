@@ -8,8 +8,8 @@ import app.inisiator.myapplication.R
 
 private val peluangTabTitles = arrayOf(
     R.string.tab_artikel,
-    R.string.tab_kegiatan,
-    R.string.tab_kompetensi
+    R.string.tab_kegiatan
+//    R.string.tab_kompetensi
 )
 
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager):
@@ -20,7 +20,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager):
         when (position) {
             0 -> fragment = ArtikelFragment()
             1 -> fragment = KegiatanFragment()
-            2 -> fragment = KompetensiFragment()
+//            2 -> fragment = KompetensiFragment()
         }
 
         return fragment!!
@@ -31,6 +31,7 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager):
     }
 
     override fun getCount(): Int {
-        return 3
+        return 2
+//        return 3
     }
 }

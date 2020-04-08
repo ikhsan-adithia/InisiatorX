@@ -184,7 +184,7 @@ yang ada di bawah ini, jika anda belum melengkapi biodata anda akan diarahkan un
                     android:background="@drawable/rounded_corner_5dp"
                     android:backgroundTint="@color/colorPrimary"
                     android:fontFamily="@font/nunito_sans_bold"
-                    android:text="Konfimasi"
+                    android:text="Partisipasi"
                     android:textAllCaps="false"
                     android:textColor="#ffffff"
                     android:textSize="14sp" />
