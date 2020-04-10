@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package app.inisiator.myapplication
 
 import android.app.Activity.RESULT_OK
@@ -10,15 +12,11 @@ import android.os.Handler
 import android.provider.MediaStore
 import android.util.Base64
 import android.view.LayoutInflater
-import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -26,16 +24,12 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
-import com.facebook.shimmer.ShimmerFrameLayout
-import com.github.ybq.android.spinkit.SpinKitView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONException
 import org.json.JSONObject
-import org.w3c.dom.Text
 import java.io.ByteArrayOutputStream
 import java.io.IOException
-import java.text.NumberFormat
 import java.util.*
 
 class Akun : Fragment() {
@@ -115,8 +109,8 @@ class Akun : Fragment() {
         if (photo.equals("")) {
         }
         else {
-            val profilee = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
-            Glide.with(activity!!).load(photo).into(profilee)}
+            val profiles = root.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
+            Glide.with(activity!!).load(photo).into(profiles)}
         main.status(true, activity)
         return root
     }
@@ -147,7 +141,7 @@ class Akun : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode === 1 && resultCode === RESULT_OK && data != null && data.data != null) {
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.data != null) {
             val filepath = data.data
             try {
                 profilee = activity?.findViewById<View>(R.id.profilePicture_Profile) as CircleImageView
@@ -156,9 +150,9 @@ class Akun : Fragment() {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-            var sessionManager = SessionManager(activity)
-            var user: HashMap<String, String> = sessionManager.userDetail
-            var emaill = user.get("EMAIL")
+            val sessionManager = SessionManager(activity)
+            val user: HashMap<String, String> = sessionManager.userDetail
+            val emaill = user.get("EMAIL")
             UploadPicture(emaill!!, bitmap?.let { getStringImage(it) }!!)
         }
     }
@@ -204,8 +198,8 @@ class Akun : Fragment() {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()
-                params.put("email", email)
-                params.put("photo", photo)
+                params["email"] = email
+                params["photo"] = photo
                 return params
             }
         }

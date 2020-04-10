@@ -48,7 +48,7 @@ class InsertFileKompetisi : AppCompatActivity() {
             val selectedFile = data.data
             filePath = selectedFile
             Log.d("InsertFile", "--------noActivityResult--------")
-            Log.d("InsertFile", "selectedFile           : $selectedFile")
+            Log.d("InsertFile", "FilePath.getPath(this, selectedFile) : ${FilePath.getPath(this, selectedFile)}")
             Log.d("InsertFile", "selectedFile           : $selectedFile")
             Log.d("InsertFile", "data?.data.toString()  : ${data.data.toString()}")
             Log.d("InsertFile", "data?.type.toString()  : ${data.type.toString()}")

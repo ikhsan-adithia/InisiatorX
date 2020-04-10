@@ -350,7 +350,7 @@ class Mutabaah : AppCompatActivity() {
                         bottomSheetDialog.setContentView(bottomSheetView)
                         bottomSheetDialog.show()
                     }
-                }, Response.ErrorListener { error ->
+                }, Response.ErrorListener { _ ->
             val bottomSheetDialog = BottomSheetDialog(
                     this, R.style.BottomSheetDialogTheme
             )
