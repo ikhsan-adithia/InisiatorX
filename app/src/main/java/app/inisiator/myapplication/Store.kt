@@ -293,7 +293,7 @@ class StoreItem(val item: app.inisiator.myapplication.models.Store,val context: 
         viewHolder.itemView.type.text = item.jenis
         viewHolder.itemView.stock.text = "${item.harga}" + " C / "
 
-        viewHolder.itemView.minus.setOnClickListener{
+        viewHolder.itemView.plus.setOnClickListener{
             val jumlah =  Integer.parseInt(viewHolder.itemView.quantity.text.toString())
             val harga = Integer.parseInt(viewHolder.itemView.price.text.toString())
             val hasil = jumlah + 1
@@ -385,7 +385,7 @@ class StoreItem(val item: app.inisiator.myapplication.models.Store,val context: 
             else if (position == 81){ rimbang = rimbang + 1 }
         }
 
-        viewHolder.itemView.plus.setOnClickListener{
+        viewHolder.itemView.minus.setOnClickListener{
             val jumlah =  Integer.parseInt(viewHolder.itemView.quantity.text.toString())
             if (jumlah == 0)
             {
