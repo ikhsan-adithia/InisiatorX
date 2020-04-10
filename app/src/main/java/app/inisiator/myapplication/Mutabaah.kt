@@ -53,7 +53,7 @@ class Mutabaah : AppCompatActivity() {
                         .setTitle("Jujur Dong!")
                         .setMessage("Kamu yakin sudah melaksanakannya?, kalau bohong dosa loh!. Masa sama diri sendiri bohong")
                         .setPositiveButton("Yakin") { _, _ ->
-                            add("dhuha", no!!)
+                            add("dhuha", no)
                         }
                         .setNegativeButton("Tidak") { _, _ -> }
                 alertDialog.show()
@@ -67,7 +67,7 @@ class Mutabaah : AppCompatActivity() {
                         .setTitle("Jujur Dong!")
                         .setMessage("Kamu yakin sudah melaksanakannya?, kalau bohong dosa loh!. Masa sama diri sendiri bohong")
                         .setPositiveButton("Yakin") { _, _ ->
-                            add("tahajud", no!!)
+                            add("tahajud", no)
                         }
                         .setNegativeButton("Tidak") { _, _ -> }
                 alertDialog.show()
@@ -81,7 +81,7 @@ class Mutabaah : AppCompatActivity() {
                         .setTitle("Jujur Dong!")
                         .setMessage("Kamu yakin sudah melaksanakannya?, kalau bohong dosa loh!. Masa sama diri sendiri bohong")
                         .setPositiveButton("Yakin") { _, _ ->
-                            add("puasa", no!!)
+                            add("puasa", no)
                         }
                         .setNegativeButton("Tidak") { _, _ -> }
                 alertDialog.show()
@@ -95,7 +95,7 @@ class Mutabaah : AppCompatActivity() {
                         .setTitle("Jujur Dong!")
                         .setMessage("Kamu yakin sudah melaksanakannya?, kalau bohong dosa loh!. Masa sama diri sendiri bohong")
                         .setPositiveButton("Yakin") { _, _ ->
-                            add("tilawah", no!!)
+                            add("tilawah", no)
                         }
                         .setNegativeButton("Tidak") { _, _ -> }
                 alertDialog.show()
@@ -109,7 +109,7 @@ class Mutabaah : AppCompatActivity() {
                         .setTitle("Jujur Dong!")
                         .setMessage("Kamu yakin sudah melaksanakannya?, kalau bohong dosa loh!. Masa sama diri sendiri bohong")
                         .setPositiveButton("Yakin") { _, _ ->
-                            add("infaq", no!!)
+                            add("infaq", no)
                         }
                         .setNegativeButton("Tidak") { _, _ -> }
                 alertDialog.show()
@@ -222,7 +222,7 @@ class Mutabaah : AppCompatActivity() {
                         bottomSheetDialog.setContentView(bottomSheetView)
                         bottomSheetDialog.show()
                     }
-                }, Response.ErrorListener { error ->
+                }, Response.ErrorListener {
             val bottomSheetDialog = BottomSheetDialog(
                     this, R.style.BottomSheetDialogTheme
             )
