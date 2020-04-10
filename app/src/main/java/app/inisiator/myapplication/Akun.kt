@@ -194,7 +194,7 @@ class Akun : Fragment() {
                         progressdialog.dismiss()
                         Toast.makeText(activity, "Try Again!", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()
@@ -280,7 +280,7 @@ class Akun : Fragment() {
                         bottomSheetDialog.setContentView(bottomSheetView)
                         bottomSheetDialog.show()
                     }
-                }, Response.ErrorListener { error ->
+                }, Response.ErrorListener { _ ->
             val bottomSheetDialog = BottomSheetDialog(
                     activity!!, R.style.BottomSheetDialogTheme
             )

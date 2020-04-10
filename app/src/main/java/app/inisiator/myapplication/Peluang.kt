@@ -18,7 +18,7 @@ class Peluang : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val root =  inflater.inflate(R.layout.fragment_peluang, container, false)
 
-        val sectionsPagerAdapterPeluang = SectionsPagerAdapter(context!!, childFragmentManager!!)
+        val sectionsPagerAdapterPeluang = SectionsPagerAdapter(context!!, childFragmentManager)
         val viewPagerPeluang = root.findViewById<ViewPager>(R.id.view_pager_peluang)
         viewPagerPeluang.adapter = sectionsPagerAdapterPeluang
         val tabsPeluang = root.findViewById<TabLayout>(R.id.tabs_peluang)

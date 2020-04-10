@@ -203,7 +203,7 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
                         Toast.makeText(this, "Try Again!", Toast.LENGTH_SHORT).show()
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 var sessionManager = SessionManager(this@Print)
@@ -255,7 +255,7 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode === 1 && resultCode === Activity.RESULT_OK && data != null && data.data != null) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             filePath = data.data
             file.text = "PDF is Selected"
             isifile = true
@@ -359,7 +359,7 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
                         bottomSheetDialog.setContentView(bottomSheetView)
                         bottomSheetDialog.show()
                     }
-                }, Response.ErrorListener { error ->
+                }, Response.ErrorListener { _ ->
             val main = findViewById<ScrollView>(R.id.main)
             val spin_kit = findViewById<SpinKitView>(R.id.spin_kit)
             main.visibility = View.VISIBLE
@@ -429,7 +429,7 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()
@@ -456,7 +456,7 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()
@@ -493,7 +493,7 @@ class Print : AppCompatActivity(),  SingleUploadBroadcastReceiver.Delegate, Adap
         val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(this)
             val user = sessionManager.userDetail

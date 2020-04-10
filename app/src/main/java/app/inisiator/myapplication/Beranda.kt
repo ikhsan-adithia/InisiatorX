@@ -212,7 +212,7 @@ class Beranda : Fragment() {
                                 sessionManager.createSession(email, password, no_hp, name, photo, balance, referral, point, pin)
                                 txtUserName?.text = name
                                 txtUserEmail?.text = email
-                                txtBalance?.setText(NumberFormat.getNumberInstance(Locale.US).format(balance!!.toInt()))
+                                txtBalance?.setText(NumberFormat.getNumberInstance(Locale.US).format(balance.toInt()))
                                 val shimmer = root.findViewById<ShimmerFrameLayout>(R.id.shimmer1)
                                 val userdetails = root.findViewById<RelativeLayout>(R.id.userDetailsHome)
                                 val spinKitView = root.findViewById<SpinKitView>(R.id.spin_kit)
@@ -250,7 +250,7 @@ class Beranda : Fragment() {
                         bottomSheetDialog.setContentView(bottomSheetView)
                         bottomSheetDialog.show()
                     }
-                }, Response.ErrorListener { error ->
+                }, Response.ErrorListener { _ ->
                         val bottomSheetDialog = BottomSheetDialog(
                                 activity!!, R.style.BottomSheetDialogTheme
                         )
@@ -294,7 +294,7 @@ class Beranda : Fragment() {
                         if (success == "1") {
                             for (i in 0 until jsonArray.length()) {
                                 val `object` = jsonArray.getJSONObject(i)
-                                val no_hp = `object`.getString("no_hp").trim { it <= ' ' }
+                                val noHp = `object`.getString("no_hp").trim { it <= ' ' }
                                 val name = `object`.getString("name").trim { it <= ' ' }
                                 val photo = `object`.getString("photo").trim { it <= ' ' }
                                 val view = layoutInflater.inflate(R.layout.merchant, null);
@@ -400,7 +400,7 @@ class Beranda : Fragment() {
                                         bottomSheetDialog.show()
                                     }
                                     else{
-                                        checkpin(nominal.text.toString(), no_.toString(), no_hp)
+                                        checkpin(nominal.text.toString(), no_.toString(), noHp)
 //                                        Request(nominal.text.toString(), no_.toString(), no_hp )
                                     }
                                 }
@@ -500,7 +500,7 @@ class Beranda : Fragment() {
                         startActivity(Intent(activity, Failed::class.java))
                     }
                 },
-                Response.ErrorListener { error ->
+                Response.ErrorListener { _ ->
                     startActivity(Intent(activity, Failed::class.java))
                 }) {
             @Throws(AuthFailureError::class)
@@ -521,7 +521,7 @@ class Beranda : Fragment() {
         val dialog = Dialog(activity!!, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(activity)
             val user = sessionManager.userDetail
@@ -591,7 +591,7 @@ class Beranda : Fragment() {
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }
-                }, Response.ErrorListener { error ->
+                }, Response.ErrorListener { _ ->
         }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {

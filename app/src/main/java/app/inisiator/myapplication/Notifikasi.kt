@@ -21,7 +21,7 @@ class Notifikasi : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val root = inflater.inflate(R.layout.fragment_notifikasi, container, false)
 
-        val sectionsPagerAdapterPeluang = SectionsPagerAdapter(context!!, childFragmentManager!!)
+        val sectionsPagerAdapterPeluang = SectionsPagerAdapter(context!!, childFragmentManager)
         val viewPagerPeluang = root.findViewById<ViewPager>(R.id.view_pager_notifikasi)
         viewPagerPeluang.adapter = sectionsPagerAdapterPeluang
         val tabsPeluang = root.findViewById<TabLayout>(R.id.tabs_notifikasi)

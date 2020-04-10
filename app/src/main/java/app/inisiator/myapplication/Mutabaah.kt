@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
 import com.android.volley.Response
@@ -139,7 +140,7 @@ class Mutabaah : AppCompatActivity() {
                                     val dhuha = findViewById<LinearLayout>(R.id.dhuha)
                                     val checkdhuha = findViewById<ImageView>(R.id.checkdhuha)
                                     dhuha.isEnabled = false
-                                    checkdhuha.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checkdhuha.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
 
                                 if (istahajud.equals("true"))
@@ -147,7 +148,7 @@ class Mutabaah : AppCompatActivity() {
                                     val tahajud = findViewById<LinearLayout>(R.id.tahajud)
                                     val checktahajud = findViewById<ImageView>(R.id.checktahajud)
                                     tahajud.isEnabled = false
-                                    checktahajud.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checktahajud.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
 
                                 if (isinfaq.equals("true"))
@@ -155,7 +156,7 @@ class Mutabaah : AppCompatActivity() {
                                     val infaq = findViewById<LinearLayout>(R.id.infaq)
                                     val checkinfaq = findViewById<ImageView>(R.id.checkinfaq)
                                     infaq.isEnabled = false
-                                    checkinfaq.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checkinfaq.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
 
                                 if (istilawah.equals("true"))
@@ -163,14 +164,14 @@ class Mutabaah : AppCompatActivity() {
                                     val tilawah = findViewById<LinearLayout>(R.id.tilawah)
                                     val checktilawah = findViewById<ImageView>(R.id.checktilawah)
                                     tilawah.isEnabled = false
-                                    checktilawah.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checktilawah.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
                                 if (ispuasa.equals("true"))
                                 {
                                     val puasa = findViewById<LinearLayout>(R.id.puasa)
                                     val checkpuasa = findViewById<ImageView>(R.id.checkpuasa)
                                     puasa.isEnabled = false
-                                    checkpuasa.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checkpuasa.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
                             }
                         }
@@ -271,7 +272,7 @@ class Mutabaah : AppCompatActivity() {
                                     val dhuha = findViewById<LinearLayout>(R.id.dhuha)
                                     val checkdhuha = findViewById<ImageView>(R.id.checkdhuha)
                                     dhuha.isEnabled = false
-                                    checkdhuha.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checkdhuha.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
 
                                 if (type.equals("tahajud"))
@@ -279,7 +280,7 @@ class Mutabaah : AppCompatActivity() {
                                     val tahajud = findViewById<LinearLayout>(R.id.tahajud)
                                     val checktahajud = findViewById<ImageView>(R.id.checktahajud)
                                     tahajud.isEnabled = false
-                                    checktahajud.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checktahajud.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
 
                                 if (type.equals("infaq"))
@@ -287,7 +288,7 @@ class Mutabaah : AppCompatActivity() {
                                     val infaq = findViewById<LinearLayout>(R.id.infaq)
                                     val checkinfaq = findViewById<ImageView>(R.id.checkinfaq)
                                     infaq.isEnabled = false
-                                    checkinfaq.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checkinfaq.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
 
                                 if (type.equals("tilawah"))
@@ -295,14 +296,14 @@ class Mutabaah : AppCompatActivity() {
                                     val tilawah = findViewById<LinearLayout>(R.id.tilawah)
                                     val checktilawah = findViewById<ImageView>(R.id.checktilawah)
                                     tilawah.isEnabled = false
-                                    checktilawah.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checktilawah.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
                                 if (type.equals("puasa"))
                                 {
                                     val puasa = findViewById<LinearLayout>(R.id.puasa)
                                     val checkpuasa = findViewById<ImageView>(R.id.checkpuasa)
                                     puasa.isEnabled = false
-                                    checkpuasa.setImageDrawable(resources.getDrawable(R.drawable.ic_listcheck))
+                                    checkpuasa.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_listcheck, null))
                                 }
                         }
                         else{

@@ -150,7 +150,7 @@ class ScanAll : AppCompatActivity() {
                         if (success == "1") {
                             for (i in 0 until jsonArray.length()) {
                                 val `object` = jsonArray.getJSONObject(i)
-                                val no_hp = `object`.getString("no_hp").trim { it <= ' ' }
+                                val noHp = `object`.getString("no_hp").trim { it <= ' ' }
                                 val name = `object`.getString("name").trim { it <= ' ' }
                                 val photo = `object`.getString("photo").trim { it <= ' ' }
                                 val view = layoutInflater.inflate(R.layout.merchant, null);
@@ -291,7 +291,7 @@ class ScanAll : AppCompatActivity() {
                                         bottomSheetDialog.setContentView(bottomSheetView)
                                         bottomSheetDialog.show()
                                     } else {
-                                        checkpinsend(nominal.text.toString(), no_.toString(), no_hp)
+                                        checkpinsend(nominal.text.toString(), no_.toString(), noHp)
 //                                        Send(nominal.text.toString(), no_.toString(), no_hp)
                                     }
                                 }
@@ -692,7 +692,7 @@ class ScanAll : AppCompatActivity() {
                         e.printStackTrace()
                         startActivity(Intent(this, Failed::class.java))
                     }
-                }, Response.ErrorListener { error ->
+                }, Response.ErrorListener { _ ->
             startActivity(Intent(this, Failed::class.java))
         }) {
             @Throws(AuthFailureError::class)
@@ -714,7 +714,7 @@ class ScanAll : AppCompatActivity() {
         val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(applicationContext)
             val user = sessionManager.userDetail
@@ -773,7 +773,7 @@ class ScanAll : AppCompatActivity() {
         val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(applicationContext)
             val user = sessionManager.userDetail

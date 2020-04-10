@@ -7,11 +7,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.*
-import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -22,11 +19,9 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.github.ybq.android.spinkit.SpinKitView
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.fragment_artikel.*
 import kotlinx.android.synthetic.main.fragment_kegiatan.*
 import kotlinx.android.synthetic.main.fragment_kegiatan.main
 import kotlinx.android.synthetic.main.fragment_kegiatan.shimmer1
@@ -58,9 +53,9 @@ class KegiatanFragment : Fragment() {
             }, 1000)
         }
 
-        var kegiatanSession: KegiatanSession? = null
+        var kegiatanSession: KegiatanSession?
         kegiatanSession = KegiatanSession(activity)
-        val user1: java.util.HashMap<String, String> = kegiatanSession!!.kegiatanSession
+        val user1: java.util.HashMap<String, String> = kegiatanSession.kegiatanSession
         val ARRAY = user1.get("ARRAY")
         if (ARRAY.equals(null))
         {
@@ -96,12 +91,12 @@ class KegiatanFragment : Fragment() {
             recyclerView.adapter = adapter
             val shimmer : ShimmerFrameLayout
             val shimmerr : RelativeLayout
-            val main : LinearLayout
-            main = root.findViewById(R.id.main)
+            val main1 : LinearLayout
+            main1 = root.findViewById(R.id.main)
             shimmerr = root.findViewById(R.id.shimmerrr)
             shimmer = root.findViewById(R.id.shimmer1)
             shimmerr.visibility = View.GONE
-            main.visibility = View.VISIBLE
+            main1.visibility = View.VISIBLE
             shimmer.stopShimmer()
             val mainn = MainActivity()
             mainn.status(true, activity)
@@ -130,7 +125,7 @@ class KegiatanFragment : Fragment() {
                             val getKeterangan = jsonObject.getString("keterangan")
 
                             // Convert Y-m-d to Month, day Year / F, d Y
-                            var kegiatanSession: KegiatanSession? = null
+                            var kegiatanSession: KegiatanSession?
                             kegiatanSession = KegiatanSession(context!!)
                             kegiatanSession.createSession(array)
 

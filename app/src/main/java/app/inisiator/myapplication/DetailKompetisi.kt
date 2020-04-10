@@ -154,7 +154,7 @@ class DetailKompetisi : AppCompatActivity() {
         val jenisKompetisi = intent.getStringExtra("JENIS_KOMP")
         val lokasiKompetisi = intent.getStringExtra("LOKASI_KOMP")
         val keteranganKomp = intent.getStringExtra("KETERANGAN")
-        val imgkompetisi = intent.getStringExtra("IMG_KOMP")
+//        val imgkompetisi = intent.getStringExtra("IMG_KOMP")
 
         nama_komp_detail.text = namaKompetisi
         penyelenggara_komp_detail.text = penyelenggara

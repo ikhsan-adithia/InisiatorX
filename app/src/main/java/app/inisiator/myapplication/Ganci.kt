@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.ImageDecoder
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -99,7 +101,7 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 profilee2.visibility = View.VISIBLE
                 val kodetext = kode.text.toString()
                 val total: Int
-                val totall: String
+//                val totall: String
                 val value = titJumlah.text.toString()
                 val finalValue = if (value == "") 0 else Integer.parseInt(value, 10)
                 when {
@@ -878,7 +880,7 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                             val merchant = spinner3.selectedItem.toString()
                             val kodes = kode.text.toString()
                             val jenis = spinner4.selectedItem.toString()
-                            val photo = "Ada Kok"
+//                            val photo = "Ada Kok"
                             checkpin2(emaill!!, bitmap3?.let { getStringImage(it) }!!, harga, ukuran, laminasi, jenis, jumlah, merchant, kodes)
                         }
                     }
@@ -947,7 +949,7 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         Toast.makeText(this, "Try Again!", Toast.LENGTH_SHORT).show()
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 var sessionManager = SessionManager(this@Ganci)
@@ -1002,7 +1004,14 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val filepath = data.data
             try {
-                bitmap3 = MediaStore.Images.Media.getBitmap(baseContext.contentResolver, filepath)
+                val bitmap3 = if (Build.VERSION.SDK_INT > 28) {
+                    val source = ImageDecoder.createSource(this.contentResolver, filepath!!)
+                    ImageDecoder.decodeBitmap(source)
+                } else {
+                    @Suppress("DEPRECATION")
+                    MediaStore.Images.Media.getBitmap(baseContext.contentResolver, filepath)
+                }
+
                 profilee.setImageBitmap(bitmap3)
                 isimage = true
             } catch (e: IOException) {
@@ -1011,7 +1020,13 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         } else if (requestCode == 2 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val filepath2 = data.data
             try {
-                bitmap2 = MediaStore.Images.Media.getBitmap(baseContext.contentResolver, filepath2)
+                bitmap2 = if (Build.VERSION.SDK_INT > 28) {
+                    val source = ImageDecoder.createSource(this.contentResolver, filepath2!!)
+                    ImageDecoder.decodeBitmap(source)
+                } else {
+                    @Suppress("DEPRECATION")
+                    MediaStore.Images.Media.getBitmap(baseContext.contentResolver, filepath2)
+                }
                 profilee2.setImageBitmap(bitmap2)
                 isimage2 = true
             } catch (e: IOException) {
@@ -1057,7 +1072,7 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         }, 3000)
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()
@@ -1113,7 +1128,7 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         }, 3000)
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()
@@ -1168,7 +1183,7 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         e.printStackTrace()
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 return java.util.HashMap()
@@ -1210,7 +1225,7 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(this)
             val user = sessionManager.userDetail
@@ -1274,7 +1289,7 @@ class Ganci : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(this)
             val user = sessionManager.userDetail

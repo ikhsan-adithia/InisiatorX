@@ -7,21 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.inisiator.myapplication.*
-import app.inisiator.myapplication.models.QrNotif
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.github.ybq.android.spinkit.SpinKitView
-import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.fragment_notifikasi_tab.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -60,9 +55,9 @@ class TransaksiFragment : Fragment() {
             }, 1000)
         }
 
-        var transaksiSession: TransaksiSession? = null
+        var transaksiSession: TransaksiSession?
         transaksiSession = TransaksiSession(activity)
-        val user1: java.util.HashMap<String, String> = transaksiSession!!.transaksiSession
+        val user1: java.util.HashMap<String, String> = transaksiSession.transaksiSession
         val ARRAY = user1.get("ARRAY")
         if (ARRAY.equals(null))
         {
@@ -96,12 +91,12 @@ class TransaksiFragment : Fragment() {
             recyclerView!!.adapter = adapter
             val shimmer : ShimmerFrameLayout
             val shimmerr : RelativeLayout
-            val main : LinearLayout
-            main = root.findViewById(R.id.mainn)
+            val main1 : LinearLayout
+            main1 = root.findViewById(R.id.mainn)
             shimmerr = root.findViewById(R.id.shimmerrrr)
             shimmer = root.findViewById(R.id.shimmer11)
             shimmerr.visibility = View.GONE
-            main.visibility = View.VISIBLE
+            main1.visibility = View.VISIBLE
             shimmer.stopShimmer()
             val mainn = MainActivity()
             mainn.status(true, activity)
@@ -116,7 +111,7 @@ class TransaksiFragment : Fragment() {
                         //converting the string to json array object
                         val array = JSONArray(response)
 
-                        var transaksiSession: TransaksiSession? = null
+                        var transaksiSession: TransaksiSession?
                         transaksiSession = TransaksiSession(context!!)
                         transaksiSession.createSession(array)
                         //traversing through all the object

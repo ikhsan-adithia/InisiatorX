@@ -15,9 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.inisiator.myapplication.*
-import app.inisiator.myapplication.models.AvailableTicket
 import app.inisiator.myapplication.models.QrNotif
-import app.inisiator.myapplication.tab_peluang.TicketItem
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -26,7 +24,6 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.fragment_kegiatan.*
 import kotlinx.android.synthetic.main.fragment_notifikasi_tab.*
 import kotlinx.android.synthetic.main. notif_item.view.*
 import org.json.JSONArray
@@ -52,9 +49,9 @@ class NotifikasiFragment : Fragment() {
             }, 1000)
         }
 
-        var notifikasiSession: NotifikasiSession? = null
+        var notifikasiSession: NotifikasiSession?
         notifikasiSession = NotifikasiSession(activity)
-        val user1: java.util.HashMap<String, String> = notifikasiSession!!.notifikasiSession
+        val user1: java.util.HashMap<String, String> = notifikasiSession.notifikasiSession
         val ARRAY = user1.get("ARRAY")
         if (ARRAY.equals(null))
         {
@@ -101,12 +98,12 @@ class NotifikasiFragment : Fragment() {
             recyclerView.adapter = adapter
             val shimmer : ShimmerFrameLayout
             val shimmerr : RelativeLayout
-            val main : LinearLayout
-            main = root.findViewById(R.id.mainn)
+            val main1 : LinearLayout
+            main1 = root.findViewById(R.id.mainn)
             shimmerr = root.findViewById(R.id.shimmerrrr)
             shimmer = root.findViewById(R.id.shimmer11)
             shimmerr.visibility = View.GONE
-            main.visibility = View.VISIBLE
+            main1.visibility = View.VISIBLE
             shimmer.stopShimmer()
             val mainn = MainActivity()
             mainn.status(true, activity)
@@ -140,7 +137,7 @@ class NotifikasiFragment : Fragment() {
                             val email = user["EMAIL"]
 
                             if (getEmail == email) {
-                                var notifikasiSession: NotifikasiSession? = null
+                                var notifikasiSession: NotifikasiSession?
                                 notifikasiSession = NotifikasiSession(context!!)
                                 notifikasiSession.createSession(array)
 

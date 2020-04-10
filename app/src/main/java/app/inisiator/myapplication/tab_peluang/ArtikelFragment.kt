@@ -10,31 +10,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
-import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import app.inisiator.myapplication.*
 import app.inisiator.myapplication.models.AvailArticle
-import app.inisiator.myapplication.models.TopThree
 import com.android.volley.AuthFailureError
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.bumptech.glide.Glide
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.activity_read.*
-import kotlinx.android.synthetic.main.avail_article_row.*
 import kotlinx.android.synthetic.main.avail_article_row.view.*
 import kotlinx.android.synthetic.main.fragment_artikel.*
-import kotlinx.android.synthetic.main.fragment_notifikasi_tab.*
 import org.json.JSONArray
 import org.json.JSONException
 
@@ -48,7 +40,7 @@ class ArtikelFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root =  inflater.inflate(R.layout.fragment_artikel, container, false)
-        var artikelSession: ArtikelSession? = null
+        var artikelSession: ArtikelSession?
         artikelSession = ArtikelSession(activity)
         swipeContainer = root.findViewById(R.id.swipe_artikel_tab)
         val main = MainActivity()
@@ -64,7 +56,7 @@ class ArtikelFragment : Fragment() {
             }, 1000)
         }
 
-        val user1: java.util.HashMap<String, String> = artikelSession!!.artikelSession
+        val user1: java.util.HashMap<String, String> = artikelSession.artikelSession
         val TITLE1 = user1.get("TITLE1")
         val TITLE2 = user1.get("TITLE2")
         val TITLE3 = user1.get("TITLE3")
@@ -108,12 +100,12 @@ class ArtikelFragment : Fragment() {
             recyler.adapter = adapter
             val shimmer : ShimmerFrameLayout
             val shimmerr : RelativeLayout
-            val main : LinearLayout
-            main = root.findViewById(R.id.main)
+            val main1 : LinearLayout
+            main1 = root.findViewById(R.id.main)
             shimmerr = root.findViewById(R.id.shimmerrr)
             shimmer = root.findViewById(R.id.shimmer1)
             shimmerr.visibility = View.GONE
-            main.visibility = View.VISIBLE
+            main1.visibility = View.VISIBLE
             shimmer.stopShimmer()
             val mainn = MainActivity()
             mainn.status(true, activity)
@@ -186,7 +178,7 @@ class ArtikelFragment : Fragment() {
                                 arrayIndex5.getString("thumbnail")
                         )
 
-                        var artikelSession: ArtikelSession? = null
+                        var artikelSession: ArtikelSession?
                         artikelSession = ArtikelSession(context!!)
                         artikelSession.createSession(titleArray[0], titleArray[1], titleArray[2], titleArray[3], titleArray[4], previewArray[0], previewArray[1], previewArray[2], previewArray[3], previewArray[4], timeArray[0], timeArray[1], timeArray[2], timeArray[3], timeArray[4], urlArray[0], urlArray[1], urlArray[2], urlArray[3], urlArray[4], thumbnailArray[0], thumbnailArray[1], thumbnailArray[2], thumbnailArray[3], thumbnailArray[4])
 

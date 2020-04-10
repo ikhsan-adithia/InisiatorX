@@ -770,7 +770,7 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         Toast.makeText(this, "Try Again!", Toast.LENGTH_SHORT).show()
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 var sessionManager = SessionManager(this@Pin)
@@ -815,7 +815,7 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode === 1 && resultCode === Activity.RESULT_OK && data != null && data.data != null) {
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
             val filepath = data.data
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(baseContext.contentResolver, filepath)
@@ -824,8 +824,6 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-            var sessionManager = SessionManager(this)
-            var user: HashMap<String, String> = sessionManager.userDetail
         }
     }
 
@@ -866,7 +864,7 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         }, 3000)
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()
@@ -921,7 +919,7 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                         e.printStackTrace()
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()
@@ -945,7 +943,7 @@ class Pin : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(this)
             val user = sessionManager.userDetail

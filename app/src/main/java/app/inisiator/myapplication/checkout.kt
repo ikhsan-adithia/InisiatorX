@@ -231,7 +231,7 @@ class checkoutnow : AppCompatActivity() {
                         no.error = "Silahkan Isi Nomor Terlebih Dahulu"
                     }
                     else{
-                        var totalnya = 0
+                        var totalnya: Int
                         if (txtongkir.text.toString() == "30 C")
                         {
                             totalnya = withongkir
@@ -266,8 +266,8 @@ class checkoutnow : AppCompatActivity() {
             main.visibility = View.INVISIBLE
             spinkit.visibility = View.VISIBLE
             if (ongkir.text.toString() == "stayhome"){
-                val txtongkir = findViewById<TextView>(R.id.ongkir)
-                txtongkir.text = "0 C"
+                val txtOngcir = findViewById<TextView>(R.id.ongkir)
+                txtOngcir.text = "0 C"
                 totalbayar.text = "$total C"
                 Handler().postDelayed({
                     main.visibility = View.VISIBLE
@@ -299,7 +299,7 @@ class checkoutnow : AppCompatActivity() {
         val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(this)
             val user = sessionManager.userDetail
@@ -388,7 +388,7 @@ class checkoutnow : AppCompatActivity() {
 
                         if (success.equals("1")) {
                             Handler().postDelayed({
-                                val main = findViewById<ScrollView>(R.id.main)
+//                                val main = findViewById<ScrollView>(R.id.main)
                                 val spinkit = findViewById<SpinKitView>(R.id.spin_checkout)
                                 spinkit.visibility = View.GONE
                                 val store = Store()
@@ -417,7 +417,7 @@ class checkoutnow : AppCompatActivity() {
                         }, 3000)
 //                        Toast.makeText(activity, "Error $e", Toast.LENGTH_SHORT).show()
                     }
-                }, Response.ErrorListener { error -> }) {
+                }, Response.ErrorListener { _ -> }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()

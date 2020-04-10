@@ -246,7 +246,7 @@ class Scanner2 : AppCompatActivity() {
         val dialog = Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
         dialog.setContentView(view)
         val pinView = dialog.findViewById<Pinview>(R.id.pinview1)
-        pinView.setPinViewEventListener(Pinview.PinViewEventListener { pinview, fromUser -> //Make api calls here or what not
+        pinView.setPinViewEventListener(Pinview.PinViewEventListener { _, _ -> //Make api calls here or what not
             val intPIN = pinView.value
             val sessionManager = SessionManager(applicationContext)
             val user = sessionManager.userDetail
@@ -314,7 +314,7 @@ class Scanner2 : AppCompatActivity() {
                         e.printStackTrace()
                         startActivity(Intent(this, Failed::class.java))
                     }
-                }, Response.ErrorListener { error -> startActivity(Intent(this, Failed::class.java)) }) {
+                }, Response.ErrorListener { _ -> startActivity(Intent(this, Failed::class.java)) }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = java.util.HashMap<String, String>()

@@ -45,7 +45,7 @@ class Changepin : AppCompatActivity() {
         val pin2 = findViewById<Pinview>(R.id.pinview2);
         val text1 = findViewById<TextView>(R.id.text1);
         val text2 = findViewById<TextView>(R.id.text2);
-        pin1.setPinViewEventListener(PinViewEventListener { pinview1, fromUser -> //Make api calls here or what not
+        pin1.setPinViewEventListener(PinViewEventListener { pinview1, _ -> //Make api calls here or what not
             if (pinview1.value == pin) {
                 value1 = pinview1.value
                 pin1.visibility = View.GONE
@@ -76,7 +76,7 @@ class Changepin : AppCompatActivity() {
             }
         })
 
-        pin2.setPinViewEventListener(PinViewEventListener { pinview2, fromUser -> //Make api calls here or what not
+        pin2.setPinViewEventListener(PinViewEventListener { pinview2, _ -> //Make api calls here or what not
             if (pinview2.value == pin) {
                 val bottomSheetDialog = BottomSheetDialog(
                         this, R.style.BottomSheetDialogTheme
