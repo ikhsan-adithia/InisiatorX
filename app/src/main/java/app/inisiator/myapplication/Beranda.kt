@@ -24,6 +24,7 @@ import com.github.ybq.android.spinkit.SpinKitView
 import com.goodiebag.pinview.Pinview
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import de.hdodenhof.circleimageview.CircleImageView
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.text.NumberFormat
@@ -93,6 +94,10 @@ class Beranda : Fragment() {
             val eshopping = bottomSheetView.findViewById<LinearLayout>(R.id.eshopping)
             eshopping.setOnClickListener {
                 startActivity(Intent(activity, Eshopping::class.java))
+            }
+            val reward = bottomSheetView.findViewById<LinearLayout>(R.id.btnReward)
+            reward.setOnClickListener {
+                startActivity(Intent(activity, RewardAdActivity::class.java))
             }
             bottomSheetDialog.show()
         }
