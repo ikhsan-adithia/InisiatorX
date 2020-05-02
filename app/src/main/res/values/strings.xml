@@ -70,4 +70,12 @@
         <item>Siswa/i</item>
         <item>Mahasiswa/i</item>
     </string-array>
+    <string name="title_activity_webview">WebviewActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="splash2">Splash2</string>
+    <string name="webview_1">Webview 1</string>
+    <string name="webview_2">Webview 2</string>
+    <string name="webview_3">Webview 3</string>
 </resources>

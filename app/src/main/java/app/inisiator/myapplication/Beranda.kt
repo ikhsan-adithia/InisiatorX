@@ -62,6 +62,12 @@ class Beranda : Fragment() {
 //        val referral = user.get("REFERRAL")
 //        val point = user.get("POINT")
 //        val pin = user.get("PIN")
+
+        val web_test = root.findViewById<View>(R.id.web_test) as Button
+        web_test.setOnClickListener {
+            startActivity(Intent( activity , Splash2Activity::class.java))
+        }
+
         swipeContainer = root.findViewById(R.id.swipe_home)
         val main = MainActivity()
         main.status(false, activity)

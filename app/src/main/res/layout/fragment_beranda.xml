@@ -296,6 +296,14 @@
                     android:layout_gravity="center"
                     app:SpinKit_Color="#EEEEEE" />
 
+                <Button
+                    android:id="@+id/web_test"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Webview Test"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:visibility="invisible"
                     android:layout_marginTop="10dp"
